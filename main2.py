@@ -5,7 +5,7 @@ from PySide6.QtGui import QGuiApplication
 from PySide6.QtQml import QQmlApplicationEngine
 
 
-#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ata
 class Manager(QObject):
     def __init__(self, parent=None):
         super().__init__(parent)
