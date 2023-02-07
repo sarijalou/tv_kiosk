@@ -2,48 +2,82 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.12
 Rectangle {
-    width: Screen.width/3
-    height: Screen.height/1.2
+    //width: Screen.width/3
+    //height: Screen.height/1.2
 
     color: "green"
-    border.color: "red"
-     
-    image{
-        source:images/
-    } 
 
-    //property alias title: textItem.text
+    Column{
 
-   
-    RowLayout {
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.centerIn: parent
+        //anchors.centerIn: parent
 
-        Button {
-            id : button1
-            text: "Button1"
-            Layout.fillWidth: true
-            onClicked: {
-                console.log("Clicked on button1")
-            }
-            onDoubleClicked: {
-                console.log("Double clicked on button1")
-            }
+        x:parent.width/2-width/2
+
+
+        Image {
+
+            source:'images/download.png'
+            width: 200
+            height: 150
+x:parent.width/2-width/2
+
+        }
+        Item {
+
+
+        height: 50
+        width: 10
+
         }
 
-        Button{
-            id : button2
-            text : "Button2"
-            Layout.fillWidth: true
-            onClicked: {
-                console.log("Clicked on button2")
-            }
+        Label{
+            text: 'کجا میل می کنید'
+            x:parent.width/2-width/2
+
+
         }
-    
+
+        Item {
+
+
+        height: 50
+        width: 10
+
+        }
+
+        Row{
+            id:lay_id
+
+spacing: 10
+
+            Button {
+                id : button1
+                text: "Button1"
+                height: 250
+width: 200
+
+                onClicked: {
+                    console.log("Clicked on button1")
+                }
+                onDoubleClicked: {
+                    console.log("Double clicked on button1")
+                }
+            }
+
+            Button{
+                id : button2
+                text : "Button2"
+                height: 250
+
+                width: 200
+
+                onClicked: {
+                    console.log("Clicked on button2")
+                }
+            }
+
+        }
     }
-        anchors.centerIn: parent
-        //font.family: Constants.largeFont.family
-        //font.pixelSize: Constants.largeFont.pixelSize
-    }
+
+}
 

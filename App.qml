@@ -3,7 +3,7 @@ import QtQuick.Controls 2.15
 
 Window {
     id: root
-    width: Screen.width/3
+   width: Screen.width/3
     height: Screen.height/1.2
     
     //visibility: "FullScreen"
@@ -42,7 +42,7 @@ Window {
         anchors.right: parent.right
         anchors.bottom: parent.bottom
         anchors.left: parent.left
-        initialItem: Menu_asli {}
+        initialItem: Dogozine {}
     }
 
     Drawer {
