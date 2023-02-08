@@ -19,14 +19,14 @@ Rectangle {
             source:'images/download.png'
             width: 200
             height: 150
-x:parent.width/2-width/2
+            x:parent.width/2-width/2
 
         }
         Item {
 
 
-        height: 50
-        width: 10
+            height: 50
+            width: 10
 
         }
 
@@ -40,44 +40,119 @@ x:parent.width/2-width/2
         Item {
 
 
-        height: 50
-        width: 10
+            height: 50
+            width: 10
 
         }
 
         Row{
             id:lay_id
 
-spacing: 10
+            spacing: 10
 
             Button {
                 id : button1
-                text: "Button1"
+                text : "Button1"
                 height: 250
-width: 200
 
+                width: 200
+                Image {
+
+                    source:'images/Eat_in.png'
+                    width: 200
+                    height: 150
+                    x:parent.width/2-width/2
+
+                }
                 onClicked: {
-                    console.log("Clicked on button1")
+                    console.log("Clicked on button2")
                 }
-                onDoubleClicked: {
-                    console.log("Double clicked on button1")
+
+                onPressed: {
+
+                    anim.start()
                 }
-            }
+
+                SequentialAnimation{
+                    id: anim
+
+                    // Expand the button
+                    PropertyAnimation {
+                        target: button1
+                        property: "scale"
+                        to: 0.9
+                        duration: 150
+                        easing.type: Easing.InOutQuad
+                    }
+
+                    // Shrink back to normal
+                    PropertyAnimation {
+                        target: button1
+                        property: "scale"
+                        to: 1
+                        duration: 150
+                        easing.type: Easing.InOutQuad
+                    }
+
+
+                }
+
+               }
 
             Button{
+
+
                 id : button2
                 text : "Button2"
                 height: 250
 
                 width: 200
+                Image {
 
+                    source: "images/takeaway.png"
+                    width: 200
+                    height: 150
+                    x:parent.width/2-width/2
+                }
                 onClicked: {
                     console.log("Clicked on button2")
                 }
-            }
 
+                onPressed: {
+
+                    anim2.start()
+                }
+
+                SequentialAnimation{
+                    id: anim2
+
+                    // Expand the button
+                    PropertyAnimation {
+                        target: button2
+                        property: "scale"
+                        to: 0.9
+                        duration: 150
+                        easing.type: Easing.InOutQuad
+                    }
+
+                    // Shrink back to normal
+                    PropertyAnimation {
+                        target: button2
+                        property: "scale"
+                        to: 1
+                        duration: 150
+                        easing.type: Easing.InOutQuad
+                    }
+
+
+                }
+
+
+
+            }
         }
     }
-
 }
+
+
 
