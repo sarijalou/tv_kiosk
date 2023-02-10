@@ -9,7 +9,7 @@ Rectangle {
     Button{
         text:'منو اصلی'
         onClicked: {
-            width=300
+          ss1.push("Dogozine.qml")
 
         }
 
