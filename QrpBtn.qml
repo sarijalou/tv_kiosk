@@ -6,30 +6,38 @@ import QtQuick.Controls 2.15
 import QtQuick.Layouts 2.15
 Item
 {
-        id: root
-        width: 200
-        height: 200 
-
-Image {
-    source: "images/deser.png"
+    id: root
+    width: 200
+    height: 200
+    property alias  src:imgg.source
+    property int duration: 250
+    property alias text: label.text
     signal clicked
-anchors.centerIn:parent
+
+
+    Image
+    {
+        id:imgg
+        source: "images/pack.png"
+        signal clicked
+        anchors.centerIn:parent
         width: 150
         height: 150
 
-    Label {
-        id: label
+        Label
+        {
+            id: label
 
-        text: qsTr("Label")
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.top :parent.bottom
-        color: "#443224"
-        font.pixelSize: 10
+            text: qsTr("Label")
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.top :parent.bottom
+            color: "#443224"
+            font.pixelSize: 10
+
+        }
     }
-}
-    property int duration: 250
-    property alias text: label.text
-//! [0]
+
+    //! [0]
     MouseArea {
         anchors.fill: parent
         onClicked: root.clicked()
@@ -39,7 +47,7 @@ anchors.centerIn:parent
             animation2.start()
         }
     }
-//! [0]
+    //! [0]
 
     Rectangle {
         id: glow

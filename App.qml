@@ -42,7 +42,7 @@ Window {
         anchors.right: parent.right
         anchors.bottom: parent.bottom
         anchors.left: parent.left
-        initialItem: Dogozine {}
+        initialItem: Menu_asli {}
     }
 
     Drawer {

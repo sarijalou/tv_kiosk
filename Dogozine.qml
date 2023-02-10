@@ -1,28 +1,33 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.12
-Rectangle {
+Rectangle
+{
     //width: Screen.width/3
     //height: Screen.height/1.2
 
     color: "green"
 
-    Column{
+    Column
+    {
 
-        //anchors.centerIn: parent
+        anchors.horizontalCenter:  parent.horizontalCenter
 
-        x:parent.width/2-width/2
+        //x:parent.width/2-width/2
 
 
-        Image {
+
+        Image
+        {
 
             source:'images/download.png'
             width: 200
             height: 150
-            x:parent.width/2-width/2
+            anchors.horizontalCenter:  parent.horizontalCenter
 
         }
-        Item {
+        Item
+        {
 
 
             height: 50
@@ -30,50 +35,45 @@ Rectangle {
 
         }
 
-        Label{
+        Label
+        {
             text: 'کجا میل می کنید'
-            x:parent.width/2-width/2
+            anchors.horizontalCenter:  parent.horizontalCenter
 
 
         }
 
-        Item {
-
-
+        Item
+        {
             height: 50
             width: 10
 
         }
 
-        Row{
+        Row
+        {
             id:lay_id
 
             spacing: 10
 
-            Button {
+            Button
+            {
                 id : button1
                 text : "Button1"
                 height: 250
-
                 width: 200
-                Image {
 
-                    source:'images/Eat_in.png'
-                    width: 200
-                    height: 150
-                    x:parent.width/2-width/2
-
-                }
-                onClicked: {
+                onClicked:
+                {
                     console.log("Clicked on button2")
                 }
-
-                onPressed: {
-
+                onPressed:
+                {
                     anim.start()
                 }
 
-                SequentialAnimation{
+                SequentialAnimation
+                {
                     id: anim
 
                     // Expand the button
@@ -97,37 +97,44 @@ Rectangle {
 
                 }
 
-               }
+                Image
+                {
 
-            Button{
+                    source:'images/Eat_in.png'
+                    width: 200
+                    height: 150
+                    x:parent.width/2-width/2
+
+                }
+            }
+
+            Button
+            {
 
 
                 id : button2
                 text : "Button2"
                 height: 250
-
                 width: 200
-                Image {
 
-                    source: "images/takeaway.png"
-                    width: 200
-                    height: 150
-                    x:parent.width/2-width/2
-                }
-                onClicked: {
+                onClicked:
+                {
                     console.log("Clicked on button2")
                 }
 
-                onPressed: {
+                onPressed:
+                {
 
                     anim2.start()
                 }
 
-                SequentialAnimation{
+                SequentialAnimation
+                {
                     id: anim2
 
                     // Expand the button
-                    PropertyAnimation {
+                    PropertyAnimation
+                    {
                         target: button2
                         property: "scale"
                         to: 0.9
@@ -136,7 +143,8 @@ Rectangle {
                     }
 
                     // Shrink back to normal
-                    PropertyAnimation {
+                    PropertyAnimation
+                    {
                         target: button2
                         property: "scale"
                         to: 1
@@ -147,6 +155,13 @@ Rectangle {
 
                 }
 
+                Image
+                {
+                    source: "images/takeaway.png"
+                    width: 200
+                    height: 150
+                    anchors.horizontalCenter:  parent.horizontalCenter
+                }
 
 
             }
