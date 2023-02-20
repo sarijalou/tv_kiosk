@@ -1,9 +1,12 @@
-import QtQuick 2.15
-import QtQuick.Controls 2.15
+import QtQuick 6.4
+import QtQuick.Window 6.4
+import QtQuick.VirtualKeyboard 6.4
+import QtQuick.Controls 6.4
+
 
 Window {
     id: root
-   width: Screen.width/3
+    width: Screen.width*2/3
     height: Screen.height/1.2
     
     //visibility: "FullScreen"
@@ -36,13 +39,39 @@ Window {
         }
     }
 */
+
+    Screen01 {
+        id: mainScreen
+        width:parent.width/2
+        anchors.top: parent.top
+         anchors.bottom: parent.bottom
+        anchors.left: parent.left
+    }
     StackView {
         id: ss1
-        anchors.top: parent.top
-        anchors.right: parent.right
-        anchors.bottom: parent.bottom
-        anchors.left: parent.left
+        width:parent.width/2
+         anchors.top: parent.top
+         anchors.right: parent.right
+         anchors.bottom: parent.bottom
+        //anchors.left: parent.left
         initialItem: Menu_asli {}
+    }
+
+        InputPanel {
+        id: inputPanel
+        property bool showKeyboard :  active
+    y: showKeyboard ? parent.height - height : parent.height
+       //y:200
+         Behavior on y {
+            NumberAnimation {
+                duration: 200
+                easing.type: Easing.InOutQuad
+            }
+        }
+        anchors.leftMargin: parent.width/10
+        anchors.rightMargin: parent.width/10
+        anchors.left: parent.left
+        anchors.right: parent.right
     }
 
     Drawer {
