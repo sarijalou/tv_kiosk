@@ -54,7 +54,7 @@ Window {
          anchors.right: parent.right
          anchors.bottom: parent.bottom
         //anchors.left: parent.left
-        initialItem: Menu_asli {}
+        initialItem: Shomareh {}
     }
 
         InputPanel {

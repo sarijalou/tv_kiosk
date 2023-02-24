@@ -43,9 +43,9 @@ Rectangle {
                 z: 180
             }
 
-            Mma_Kick {
-                id: mma_Kick
-            }
+//            Mma_Kick {
+//                id: mma_Kick
+//            }
 
 
 
