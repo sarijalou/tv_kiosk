@@ -3,14 +3,16 @@ import QtQuick.Controls 2.15
 
 
 Rectangle {
-    width: Screen.width/3
-    height: Screen.height/1.2
+//    width: Screen.width/3
+//    height: Screen.height/1.2
+
     property string mystr: '09'
     color:"green"
     Button{
         text:'منو اصلی'
         onClicked: {
-            width=300
+
+            ss1.replace("Menu_asli.qml")
 
         }
 
@@ -23,24 +25,22 @@ Rectangle {
 
 
     Column {
-
+        anchors.horizontalCenter: parent.horizontalCenter
         x :20;   y :20
         spacing: 10
 
-        Rectangle {
+        Label{
+            anchors.horizontalCenter: parent.horizontalCenter
             id : firstNameRectId
-            width : 160
-            height:20
+//            width : 160
+//            height:20
             color : "beige"
+            text : "شماره موبایل خود را وارد کنید "
 
-            Text {
-                id : firstNameLabelId
-                anchors.centerIn: parent
-                text : "شماره موبایل خود را وارد کنید "
-            }
         }
 
         Rectangle {
+            anchors.horizontalCenter: parent.horizontalCenter
 
             id : firstNameTextRectId
             color : "beige"
@@ -65,87 +65,110 @@ Rectangle {
 
 
         }
-        Button
+        Grid
         {
-            text: '1'
+            columns: 3
+            spacing: 2
+            Button
+            {
+                text: '1'
+               height:width
 
-            onClicked:{mystr=mystr+'1'}
-        }
-        Button
-        {
-            text: '2'
+                onClicked:{mystr=mystr+'1'}
+            }
+            Button
+            {
+                text: '2'
+                height:width
 
-            onClicked:{mystr=mystr+'2'}
-        }
-        Button
-        {
-            text: '3'
+                onClicked:{mystr=mystr+'2'}
+            }
+            Button
+            {
+                text: '3'
+                height:width
 
-            onClicked:{mystr=mystr+'3'}
-        }
-        Button
-        {
-            text: '4'
+                onClicked:{mystr=mystr+'3'}
+            }
+            Button
+            {
+                text: '4'
+                height:width
 
-            onClicked:{mystr=mystr+'4'}
-        }
-        Button
-        {
-            text: '5'
+                onClicked:{mystr=mystr+'4'}
+            }
+            Button
+            {
+                text: '5'
+                height:width
 
-            onClicked:{mystr=mystr+'5'}
-        }
-        Button
-        {
-            text: '6'
+                onClicked:{mystr=mystr+'5'}
+            }
+            Button
+            {
+                text: '6'
+                height:width
 
-            onClicked:{mystr=mystr+'6'}
-        }
-        Button
-        {
-            text: '7'
+                onClicked:{mystr=mystr+'6'}
+            }
+            Button
+            {
+                text: '7'
+                height:width
 
-            onClicked:{mystr=mystr+'7'}
-        }
-        Button
-        {
-            text: '8'
+                onClicked:{mystr=mystr+'7'}
+            }
+            Button
+            {
+                text: '8'
+                height:width
 
-            onClicked:{mystr=mystr+'8'}
-        }
-        Button
-        {
-            text: '9'
+                onClicked:{mystr=mystr+'8'}
+            }
+            Button
+            {
+                text: '9'
+                height:width
 
-            onClicked:{mystr=mystr+'9'}
-        }
-        Button
-        {
-            text: '0'
+                onClicked:{mystr=mystr+'9'}
+            }
+            Button
+            {
+                text:'clear'
+                height:width
 
-            onClicked:{mystr=mystr+'0'}
-            enabled: false
-        }
+                onClicked:{ mystr='09'}
+            }
+            Button
+            {
+                text: '0'
+                height:width
 
-        Button
-        {
 
-            onClicked:{ mystr='09'}
-        }
-        Button
-        {
-
-            onClicked:{mystr=mystr.slice(0,-1)}
-        }
-        Button{
-            text:' بعدی'
-            onClicked: {
-                ss1.replace("Fysh.qml")
-
+                onClicked:{mystr=mystr+'0'}
+                enabled: true
             }
 
+
+            Button
+            {
+                text: 'f'
+                height:width
+
+                onClicked:{mystr=mystr.slice(0,-1)}
+            }
         }
 
+
+    }
+
+    Button{
+        anchors.right:parent.right
+        text:' بعدی'
+        onClicked: {
+            ss1.replace("Fysh.qml")
+
+        }
     }
 }
 

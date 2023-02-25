@@ -8,6 +8,7 @@ Rectangle
 
     color: "green"
 
+
     Column
     {
 
@@ -66,6 +67,7 @@ Rectangle
                 onClicked:
                 {
                     console.log("Clicked on button2")
+                    ss1.push('Menu_asli.qml')
                 }
                 onPressed:
                 {
@@ -120,6 +122,8 @@ Rectangle
                 onClicked:
                 {
                     console.log("Clicked on button2")
+                    ss1.push('Menu_asli.qml')
+
                 }
 
                 onPressed:

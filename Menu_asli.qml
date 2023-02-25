@@ -4,13 +4,21 @@ import QtQuick.Controls 2.15
 
 
 Rectangle {
+    Rectangle{
+
+    width:parent.width
+    height:parent.height/10
+    color: 'green'
+    }
 
 
     Rectangle
     {
         id:fl1
         width: parent.width*2/5
-        height: parent.height
+        height:( parent.height*9)/10
+        y:parent.height*1/10
+
         color: "blue"
 
         Flickable
@@ -146,8 +154,13 @@ Rectangle {
         id:fl2
         anchors.left: fl1.right
         width: parent.width*2/3
-        height: parent.height
-        contentHeight: nColumnId.implicitHeight
+        height: parent.height*9/10
+        y:parent.height*1/10
+//       boundsBehavior: Flickable.StopAtBounds
+       boundsBehavior: Flickable.DragAndOvershootBounds
+
+        contentHeight: nColumnId.implicitHeight//+400
+     //   contentY : contentHeight-height
 
 
         Grid
