@@ -9,7 +9,7 @@ from PySide6.QtQml import QQmlApplicationEngine
 class Manager(QObject):
     def __init__(self, parent=None):
         super().__init__(parent)
- 
+         
     @Slot(str,str)
     def foo(self,inpaaat,kk):
         print("clicked "+inpaaat+kk)
