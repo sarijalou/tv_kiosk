@@ -3,10 +3,11 @@ import QtQuick.Controls 2.15
 
 
 Rectangle {
-//    width: Screen.width/3
-//    height: Screen.height/1.2
+    //    width: Screen.width/3
+    //    height: Screen.height/1.2
 
     property string mystr: '09'
+//    property bool dokmeh: false
     color:"green"
     Button{
         text:'منو اصلی'
@@ -32,8 +33,8 @@ Rectangle {
         Label{
             anchors.horizontalCenter: parent.horizontalCenter
             id : firstNameRectId
-//            width : 160
-//            height:20
+            //            width : 160
+            //            height:20
             color : "beige"
             text : "شماره موبایل خود را وارد کنید "
 
@@ -72,7 +73,7 @@ Rectangle {
             Button
             {
                 text: '1'
-               height:width
+                height:width
 
                 onClicked:{mystr=mystr+'1'}
             }
@@ -163,12 +164,30 @@ Rectangle {
     }
 
     Button{
+        property bool dokmeh: false
         anchors.right:parent.right
         text:' بعدی'
+       enabled: baadi()
+
+       function baadi(){
+         if(mystr.length==11){
+         dokmeh=true
+         }
+         if(mystr.length!=11){
+         dokmeh=false
+         }
+        return dokmeh
+       }
+
         onClicked: {
             ss1.replace("Fysh.qml")
+            //console.log (mystr.length)
 
         }
+
+
+
+
     }
 }
 

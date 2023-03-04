@@ -24,7 +24,7 @@ Rectangle {
         id: textItem
         text: qsTr("ext")
         anchors.centerIn: parent
-        font.family: Constants.largeFont.family
-        font.pixelSize: Constants.largeFont.pixelSize
+//        font.family: Constants.largeFont.family
+//        font.pixelSize: Constants.largeFont.pixelSize
     }
 }
