@@ -81,7 +81,7 @@ Window {
 
         Column {
             anchors.fill: parent
-
+         
             ItemDelegate {
                 text: qsTr(" دوگزینه ای")
                 width: parent.width

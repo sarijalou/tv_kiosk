@@ -1,3 +1,4 @@
+import sql_cmd
 import sys
 
 from PySide6.QtCore import   QObject,Slot
@@ -18,6 +19,18 @@ class Manager(QObject):
     @Slot(result=str)
     def rett(self):
         return "kkkk"
+
+    @Slot(str)
+    def dbbbb(self,num):
+        print("clicked "+num)
+
+    @Slot(str)
+    def dbbbd(self,num):
+        
+        database = r"my.db3"
+        conn = sql_cmd.create_connection(database)
+        sql_cmd.insert_customer(conn,int(num))
+        conn.close()
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++sa
 

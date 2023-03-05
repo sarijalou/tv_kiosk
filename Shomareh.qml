@@ -182,6 +182,7 @@ Rectangle {
         onClicked: {
             ss1.replace("Fysh.qml")
             //console.log (mystr.length)
+            manager.dbbbd(mystr)
 
         }
 
