@@ -157,7 +157,11 @@ Rectangle {
         FileDialog {
             id: fileDialog
             currentFolder: StandardPaths.standardLocations(StandardPaths.PicturesLocation)[0]
-            onAccepted: image.source = selectedFile
+            // onAccepted: image.source = selectedFile
+            nameFilters: ["png file(*.png)"]
+            onAccepted: {
+                labaly.text=selectedFile
+            }
         }
 
 
@@ -213,6 +217,8 @@ Rectangle {
             border.width: 1
             Label
             {
+                id:labaly
+
                 anchors.fill: parent
 
                 text: "/img/a.png"
@@ -240,6 +246,13 @@ Rectangle {
 
         }
 
+            Image{
+                source: labaly.text
+                width: 100
+                height: 100
+               anchors.centerIn: parent
+
+            }
 
 
     }
