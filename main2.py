@@ -31,6 +31,16 @@ class Manager(QObject):
         conn = sql_cmd.create_connection(database)
         sql_cmd.insert_customer(conn,int(num))
         conn.close()
+        
+    @Slot(str,str)
+    def db_insert_to_group(self,name,img):
+        
+        database = r"my.db3"
+        conn = sql_cmd.create_connection(database)
+        sql_cmd.insert_group(conn,name,img)
+        conn.close()
+        
+        
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++sa
 

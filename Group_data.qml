@@ -234,6 +234,9 @@ Rectangle {
             anchors.bottom: parent.bottom
             anchors.right: parent.right
             y:175
+            onClicked: {
+               manager.db_insert_to_group("aaa","cccc")
+            }
 
         }
 

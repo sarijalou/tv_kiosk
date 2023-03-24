@@ -28,6 +28,21 @@ def insert_customer(conn, num):
     cur.execute(sql)
     conn.commit()
     # return cur.lastrowid
+    
+def insert_group(conn, name,img):
+    """
+    Create a new task
+    :param conn:
+    :param task:
+    :return:
+    """
+
+    sql = 'INSERT INTO Groups_tbl (Group_name,Group_image) VALUES (%s,%s);'% (name,img)
+    print(sql)
+    cur = conn.cursor()
+    cur.execute(sql)
+    conn.commit()
+    # return cur.lastrowid
 
 def create_project(conn, project):
     """
