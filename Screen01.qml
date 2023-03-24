@@ -10,8 +10,8 @@ import "asset_imports/Quick3DAssets/Mma_Kick"
 
 Rectangle {
 
-    width: 400
-    height: 700
+    // width: 400
+    // height: 700
 
     color : "#dba5a5"
 
@@ -43,9 +43,9 @@ Rectangle {
                 z: 180
             }
 
-//            Mma_Kick {
-//                id: mma_Kick
-//            }
+//           Mma_Kick {
+//               id: mma_Kick
+//           }
 
 
 

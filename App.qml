@@ -40,13 +40,7 @@ Window {
     }
 */
 
-    Screen01 {
-        id: mainScreen
-        width:parent.width/2
-        anchors.top: parent.top
-         anchors.bottom: parent.bottom
-        anchors.left: parent.left
-    }
+  
     StackView {
         id: ss1
         width:parent.width/2
@@ -124,6 +118,16 @@ Window {
             }
         }
     }
+
+      Screen01 {
+        id: mainScreen
+        width:parent.width/2
+        anchors.top: parent.top
+         anchors.bottom: parent.bottom
+        anchors.left: parent.left
+    }
+
+    
 }
 
 

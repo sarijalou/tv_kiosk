@@ -1,5 +1,6 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
+import QtQuick.Dialogs
 
 
 
@@ -145,11 +146,112 @@ Rectangle {
 
     Rectangle
     {
+        id:fl2
+        anchors.left: fl1.right
+        width: parent.width*3/5
+        height: parent.height*9/10
+        y:parent.height*1/10
+        //        color: 'yellow'
+
+
+        FileDialog {
+            id: fileDialog
+            currentFolder: StandardPaths.standardLocations(StandardPaths.PicturesLocation)[0]
+            onAccepted: image.source = selectedFile
+        }
+
+
+        Label
+        {
+            id:lbl_name
+            text: "نام گروه:"
+            anchors.right:    parent.right
+        }
+        Rectangle
+        {
+            width: 200
+            height: 20
+            //            color: "yellow"
+            border.width: 1
+            border.color: "black"
+            anchors.right: lbl_name.left
+
+            TextInput
+            {
+
+                anchors.fill:    parent
+
+            }
+        }
+
+
+        Label
+        {
+            id:lbl_ax
+            text: "عکس گروه"
+            anchors.right:    parent.right
+            y:100
+
+        }
+        Button
+        {
+            id :btn_select
+            text: "انتخاب"
+            anchors.right: lbl_ax.left
+            y:100
+            onClicked: {
+                fileDialog.open()
+            }
+
+        }
+        Rectangle
+        {
+            width: 100
+            height: 20
+            anchors.right: btn_select.left
+            y:100
+            border.width: 1
+            Label
+            {
+                anchors.fill: parent
+
+                text: "/img/a.png"
+
+
+            }
+        }
+
+        Button
+        {
+            id :btn_sabt
+            text: "ثبت"
+            anchors.bottom: parent.bottom
+            anchors.right: parent.right
+            y:175
+
+        }
+
+        Button
+        {
+            id :btn_hazf
+            text: "حذف"
+            anchors.bottom: parent.bottom
+            y:175
+
+        }
+
+
+
+    }
+
+    Rectangle
+    {
 
         width:parent.width
         height:parent.height/10
         color: 'green'
     }
+
 
 }
 
