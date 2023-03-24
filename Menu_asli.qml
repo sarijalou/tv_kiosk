@@ -4,12 +4,8 @@ import QtQuick.Controls 2.15
 
 
 Rectangle {
-    Rectangle{
 
-    width:parent.width
-    height:parent.height/10
-    color: 'green'
-    }
+
 
 
     Rectangle
@@ -286,6 +282,13 @@ Rectangle {
         ScrollBar.vertical: ScrollBar{}
     }
 
+    Rectangle
+    {
+
+    width:parent.width
+    height:parent.height/10
+    color: 'green'
+    }
 
 }
 
