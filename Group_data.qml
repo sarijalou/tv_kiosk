@@ -4,8 +4,11 @@ import QtQuick.Dialogs
 
 
 
-Rectangle {
+Rectangle
+{
 
+    property int number_of_grops:1
+    property var input_dbbbb:[]
 
     Rectangle
     {
@@ -16,7 +19,7 @@ Rectangle {
 
         color: "blue"
 
-        console.log("aaaaaaaaaaaaaaaaaaaatttttttttttttttttttaaaaaaaaaaaaaaaaaa");
+
 
         Flickable
         {
@@ -28,33 +31,28 @@ Rectangle {
                 id : mColumnId
                 anchors.fill: parent
 
-                QrpBtn
-                {
-                    id: btn1
-//                    text: "pizza"
-//                    opacity:0.8
-//                    src:"images/pizza.png"
-                }
+                Repeater {
+                      model: number_of_grops
+                      QrpBtn
+                      {
+                           text:input_dbbbb[index][0]
+                           src:input_dbbbb[index][1]
+                          //                    text: "pizza"
+                          //                    opacity:0.8
+                          //                    src:"images/pizza.png"
+                      }
 
-                QrpBtn
-                {
-                    id: btn2
-//                    text: "pizza"
-//                    opacity:0.8
-//                    src:"images/pizza.png"
-                }
 
-                QrpBtn
-                {
-                    id: btn3
-//                    text: "pizza"
-//                    opacity:0.8
-//                    src:"images/pizza.png"
-                }
+                  }
+
+
+
 
 
             }
             ScrollBar.vertical: ScrollBar{}
+
+
         }
     }
 
@@ -70,7 +68,7 @@ Rectangle {
 
         FileDialog {
             id: fileDialog
-            currentFolder: StandardPaths.standardLocations(StandardPaths.PicturesLocation)[0]
+//            currentFolder: StandardPaths.standardLocations(StandardPaths.PicturesLocation)[0]
             // onAccepted: image.source = selectedFile
             nameFilters: ["png file(*.png)"]
             onAccepted: {
@@ -135,7 +133,7 @@ Rectangle {
 
                 anchors.fill: parent
 
-                text: "/img/a.png"
+                //text: "/img/a.png"
 
 
             }
@@ -149,7 +147,9 @@ Rectangle {
             anchors.right: parent.right
             y:175
             onClicked: {
-               manager.db_insert_to_group( input_name.text,labaly.text)
+                manager.db_insert_to_group( input_name.text,labaly.text)
+                input_dbbbb=manager.db_select_from_group()
+                number_of_grops=input_dbbbb.length
 
             }
 
@@ -158,33 +158,21 @@ Rectangle {
         Button
         {
             id :btn_hazf
-            text: "read_db"
+            text: "حذف"
             anchors.bottom: parent.bottom
             y:175
-            property var input_dbbbb:[]
-            onClicked: {
 
-               input_dbbbb=manager.db_select_from_group()
-                btn1.text=input_dbbbb[0][0]
-                btn1.src=input_dbbbb[0][1]
 
-                btn2.text=input_dbbbb[1][0]
-                btn2.src=input_dbbbb[1][1]
-
-                btn3.text=input_dbbbb[2][0]
-                btn3.src=input_dbbbb[2][1]
-
-            }
 
         }
 
-            Image{
-                source: labaly.text
-                width: 100
-                height: 100
-               anchors.centerIn: parent
+        Image{
+            source: labaly.text
+            width: 100
+            height: 100
+            anchors.centerIn: parent
 
-            }
+        }
 
 
     }
@@ -195,6 +183,17 @@ Rectangle {
         width:parent.width
         height:parent.height/10
         color: 'green'
+    }
+
+
+    Component.onCompleted:
+    {
+
+
+        console.log("aaaaaaaaaaaaaaaaaaaatttttttttttttttaaaaaaaaaaaaaaaaaaa")
+        input_dbbbb=manager.db_select_from_group()
+        number_of_grops=input_dbbbb.length
+
     }
 
 
