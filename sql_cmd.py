@@ -29,7 +29,7 @@ def insert_customer(conn, num):
     conn.commit()
     # return cur.lastrowid
     
-def insert_group(conn, name,img):
+def insert_group(conn, name,img,radif):
     """
     Create a new task
     :param conn:
@@ -37,9 +37,9 @@ def insert_group(conn, name,img):
     :return:
     """
 
-    sql = 'INSERT INTO Groups_tbl (Group_name,Group_image) VALUES (?,?);'
+    sql = 'INSERT INTO Groups_tbl (Group_name,Group_image,Group_row) VALUES (?,?,?);'
     cur = conn.cursor()
-    cur.execute(sql,(name,img))
+    cur.execute(sql,(name,img,radif))
     conn.commit()
     # return cur.lastrowid
     

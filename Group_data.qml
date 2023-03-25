@@ -32,18 +32,18 @@ Rectangle
                 anchors.fill: parent
 
                 Repeater {
-                      model: number_of_grops
-                      QrpBtn
-                      {
-                           text:input_dbbbb[index][0]
-                           src:input_dbbbb[index][1]
-                          //                    text: "pizza"
-                          //                    opacity:0.8
-                          //                    src:"images/pizza.png"
-                      }
+                    model: number_of_grops
+                    QrpBtn
+                    {
+                        text:input_dbbbb[index][0]
+                        src:input_dbbbb[index][1]
+                        //                    text: "pizza"
+                        //                    opacity:0.8
+                        //                    src:"images/pizza.png"
+                    }
 
 
-                  }
+                }
 
 
 
@@ -68,7 +68,7 @@ Rectangle
 
         FileDialog {
             id: fileDialog
-//            currentFolder: StandardPaths.standardLocations(StandardPaths.PicturesLocation)[0]
+            //            currentFolder: StandardPaths.standardLocations(StandardPaths.PicturesLocation)[0]
             // onAccepted: image.source = selectedFile
             nameFilters: ["png file(*.png)"]
             onAccepted: {
@@ -147,7 +147,7 @@ Rectangle
             anchors.right: parent.right
             y:175
             onClicked: {
-                manager.db_insert_to_group( input_name.text,labaly.text)
+                manager.db_insert_to_group( input_name.text,labaly.text,input_radif.text)
                 input_dbbbb=manager.db_select_from_group()
                 number_of_grops=input_dbbbb.length
 
@@ -167,6 +167,7 @@ Rectangle
         }
 
         Image{
+            id:imagek
             source: labaly.text
             width: 100
             height: 100
@@ -174,7 +175,30 @@ Rectangle
 
         }
 
+        Label
+        {
+            id:lbl_radif
+            text: "ردیف:"
+            anchors.right:    parent.right
+            anchors.top: imagek.bottom
+        }
+        Rectangle
+        {
+            width: 200
+            height: 20
+            //            color: "yellow"
+            border.width: 1
+            border.color: "black"
+            anchors.right: lbl_radif.left
+            anchors.top: imagek.bottom
 
+
+            TextInput
+            {
+                id:input_radif
+                anchors.fill:    parent
+            }
+        }
     }
 
     Rectangle
@@ -198,5 +222,7 @@ Rectangle
 
 
 }
+
+
 
 

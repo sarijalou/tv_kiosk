@@ -32,12 +32,13 @@ class Manager(QObject):
         sql_cmd.insert_customer(conn,int(num))
         conn.close()
         
-    @Slot(str,str)
-    def db_insert_to_group(self,name,img):
+    @Slot(str,str,str)
+    def db_insert_to_group(self,name,img,radif):
         
         database = r"my.db3"
         conn = sql_cmd.create_connection(database)
-        sql_cmd.insert_group(conn,name,img)
+        print(radif,int(radif))
+        sql_cmd.insert_group(conn,name,img,int(radif))
         conn.close()
         
     # SELECT Group_id, Group_name, Group_image, Group_row FROM Groups_tbl;
