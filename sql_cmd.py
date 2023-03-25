@@ -51,7 +51,7 @@ def select_group(conn):
     :return:
     """
 
-    sql ="SELECT  Group_name, Group_image FROM Groups_tbl;"
+    sql ="SELECT  Group_name, Group_image,Group_row FROM Groups_tbl ORDER BY Group_row ;"
 
     cur = conn.cursor()
     cur.execute(sql)
