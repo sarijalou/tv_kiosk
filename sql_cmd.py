@@ -37,12 +37,31 @@ def insert_group(conn, name,img):
     :return:
     """
 
-    sql = 'INSERT INTO Groups_tbl (Group_name,Group_image) VALUES (%s,%s);'% (name,img)
-    print(sql)
+    sql = 'INSERT INTO Groups_tbl (Group_name,Group_image) VALUES (?,?);'
     cur = conn.cursor()
-    cur.execute(sql)
+    cur.execute(sql,(name,img))
     conn.commit()
     # return cur.lastrowid
+    
+def select_group(conn):
+    """
+    Create a new task
+    :param conn:
+    :param task:
+    :return:
+    """
+
+    sql ="SELECT  Group_name, Group_image FROM Groups_tbl;"
+
+    cur = conn.cursor()
+    cur.execute(sql)
+    rows = cur.fetchall()
+   
+    k=list()
+    for i in rows:
+        k.append(list(i))
+    return k
+
 
 def create_project(conn, project):
     """

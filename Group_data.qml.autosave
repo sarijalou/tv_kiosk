@@ -16,7 +16,7 @@ Rectangle {
 
         color: "blue"
 
-        console.log("aaaaaaaaaaaaaaaaaaaatttttttttttttttttttaaaaaaaaaaaaaaaaaa");
+       
 
         Flickable
         {

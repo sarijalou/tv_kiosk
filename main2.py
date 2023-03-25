@@ -40,6 +40,16 @@ class Manager(QObject):
         sql_cmd.insert_group(conn,name,img)
         conn.close()
         
+    # SELECT Group_id, Group_name, Group_image, Group_row FROM Groups_tbl;
+    @Slot(result=list)
+    def db_select_from_group(self):
+        
+        database = r"my.db3"
+        conn = sql_cmd.create_connection(database)
+        ressult=sql_cmd.select_group(conn)
+        conn.close()
+        return ressult
+        
         
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++sa
