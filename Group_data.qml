@@ -9,6 +9,7 @@ Rectangle
 
     property int number_of_grops:1
     property var input_dbbbb:[]
+    property var input_dbbbb2:[]
 
     Rectangle
     {
@@ -43,16 +44,16 @@ Rectangle
 
                         onClicked: {
 
-                            manager.db_delete_Groups(input_dbbbb[index][0],input_dbbbb[index][1])
+                            input_name.text=text
+                            labaly.text=src
+
+
+                            manager.db_delete_Groups(text,src)
 
                             input_dbbbb=manager.db_select_from_group()
                             number_of_grops=input_dbbbb.length
+//                            input_dbbbb=input_dbbbb2
 
-
-//                            console.log("hhhhiiiiii"+index)
-//                            if(index===1)
-//                            {
-//                                console.log("you are in 1")
 
 //                            }
 
@@ -179,6 +180,11 @@ Rectangle
             text: "حذف"
             anchors.bottom: parent.bottom
             y:175
+            onClicked: {
+
+
+
+            }
 
 
 
@@ -234,7 +240,11 @@ Rectangle
 
         console.log("aaaaaaaaaaaaaaaaaaaatttttttttttttttaaaaaaaaaaaaaaaaaaa")
         input_dbbbb=manager.db_select_from_group()
+
         number_of_grops=input_dbbbb.length
+        console.log(input_dbbbb)
+        console.log(number_of_grops)
+
 
     }
 
