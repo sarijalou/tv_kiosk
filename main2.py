@@ -40,8 +40,16 @@ class Manager(QObject):
         print(radif,int(radif))
         sql_cmd.insert_group(conn,name,img,int(radif))
         conn.close()
+    
+    @Slot(str,str)    
+    def db_delete_Groups(self,name,img):
         
-    # SELECT Group_id, Group_name, Group_image, Group_row FROM Groups_tbl;
+        database = r"my.db3"
+        conn = sql_cmd.create_connection(database)
+        sql_cmd.delete_Groups(conn,name,img)
+        conn.close()
+        
+        
     @Slot(result=list)
     def db_select_from_group(self):
         

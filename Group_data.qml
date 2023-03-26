@@ -40,6 +40,24 @@ Rectangle
                         //                    text: "pizza"
                         //                    opacity:0.8
                         //                    src:"images/pizza.png"
+
+                        onClicked: {
+
+                            manager.db_delete_Groups(input_dbbbb[index][0],input_dbbbb[index][1])
+
+                            input_dbbbb=manager.db_select_from_group()
+                            number_of_grops=input_dbbbb.length
+
+
+//                            console.log("hhhhiiiiii"+index)
+//                            if(index===1)
+//                            {
+//                                console.log("you are in 1")
+
+//                            }
+
+                        }
+
                     }
 
 

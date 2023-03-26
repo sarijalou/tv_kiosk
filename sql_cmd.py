@@ -103,6 +103,24 @@ def ss():
         # create a new project
         insert_customer(conn,9142010051)
 
+def delete_Groups(conn,name,img):
+    """
+    delete a new Groups
+    :param conn:
+    :param task:
+    :return:
+    """
 
+    sql ="DELETE FROM Groups_tbl WHERE Group_name=? AND Group_image=? ;"
+
+    cur = conn.cursor()
+    cur.execute(sql,(name,img))
+    conn.commit()
+
+   
+        
 if __name__ == '__main__':
-   ss()
+    database = r"my.db3"
+    conn = create_connection(database)
+    delete_Groups(conn,"ساندویچ","file:///home/ata/Desktop/tv_robot/tv_kiosk/images/sandwich.png")
+    conn.close()
