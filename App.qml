@@ -48,7 +48,7 @@ Window {
          anchors.right: parent.right
          anchors.bottom: parent.bottom
         //anchors.left: parent.left
-        initialItem: Group_data {}
+        initialItem: Menu_asli {}
     }
 
         InputPanel {
@@ -75,7 +75,14 @@ Window {
 
         Column {
             anchors.fill: parent
-         
+            ItemDelegate {
+                text: qsTr(" فرا کاربر")
+                width: parent.width
+                onClicked: {
+                    ss1.push("Group_data.qml")
+                    drawer.close()
+                }
+            }
             ItemDelegate {
                 text: qsTr(" دوگزینه ای")
                 width: parent.width

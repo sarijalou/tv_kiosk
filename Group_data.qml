@@ -207,13 +207,22 @@ Rectangle
         width:parent.width
         height:parent.height/10
         color: 'green'
+        Button{
+            anchors.left: parent.left
+            text: "menu_asli"
+
+            onClicked: {
+                ss1.push('Menu_asli.qml')
+            }
+        }
     }
+
 
 
     Component.onCompleted:
     {
 
-        console.log("aaaaaaaaaaaaaaaaaaaatttttttttttttttaaaaaaaaaaaaaaaaaaa")
+
         input_dbbbb=manager.db_select_from_group()
 
         number_of_grops=input_dbbbb.length
