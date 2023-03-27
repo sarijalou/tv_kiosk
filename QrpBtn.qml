@@ -7,22 +7,24 @@ import QtQuick.Layouts 2.15
 Item
 {
     id: root
-    width: 200
-    height: 200
+
     property alias  src:imgg.source
     property int duration: 250
     property alias text: label.text
     signal clicked
+//    property alias width: width
+//    property alias height: height
 
-
+height:width
     Image
     {
         id:imgg
         source: "images/pack.png"
         signal clicked
         anchors.centerIn:parent
-        width: 150
-        height: 150
+
+        width: parent.width*80/100
+        height: parent.height*80/100
 
         Label
         {
@@ -53,8 +55,8 @@ Item
         id: glow
         visible: false
 
-        width: 200
-        height: 200
+        width: parent.width
+        height: parent.height
         color: "#00000000"
         radius: 5
         scale: 1.05
