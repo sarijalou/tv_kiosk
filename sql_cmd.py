@@ -117,7 +117,26 @@ def delete_Groups(conn,name,img):
     cur.execute(sql,(name,img))
     conn.commit()
 
+def select_product(conn):
+    """
+    Create a new task
+    :param conn:
+    :param task:
+    :return:
+    """
+
+    sql ="SELECT  Product_name, Product_price,Product_image,Available FROM Products ;"
+
+    cur = conn.cursor()
+    cur.execute(sql)
+    rows = cur.fetchall()
    
+    k=list()
+    for i in rows:
+        k.append(list(i))
+    return k
+
+  
         
 if __name__ == '__main__':
     database = r"my.db3"

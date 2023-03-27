@@ -8,7 +8,8 @@ Rectangle {
     property int number_of_grops:1
     property var input_dbbbb:[]
     property real group_size: 30/100
-
+    property var input_product: []
+    property int number_of_product: 1
 
 
     Rectangle
@@ -61,7 +62,7 @@ Rectangle {
         width: parent.width*(1-group_size)
         height: parent.height*9/10
         y:parent.height*1/10
-
+        color: 'beige'
         Flickable
         {
 
@@ -75,116 +76,35 @@ Rectangle {
                 id : nColumnId
                 anchors.fill: parent
                 columns: 3
-                spacing: 10
-
-                Rectangle
-                {
-                    color: "red"
-                    width: parent.width/4
-                    height: 200
-                    Text
-                    {
-                        anchors.centerIn: parent
-                        text: "Element 1"
-                        font.pointSize: 10
-                        color : "white"
-                    }
-                }
+                //spacing: 10
 
 
-                Rectangle
+                Repeater
                 {
-                    color: "blue"
-                    width: parent.width/4
-                    height: 200
-                    Text
+                    model: number_of_product
+                    ProductBtn
                     {
-                        anchors.centerIn: parent
-                        text: "Element 2"
-                        font.pointSize: 10
-                        color : "white"
+                        width:parent.width/3
+
+                        //height: fl1.height
+                        text:input_product[index][0]
+                        src:input_product[index][2]
+                        price:input_product[index][1]
+                        //                    text: "pizza"
+                        //                    opacity:0.8
+                        //                    src:"images/pizza.png"
+
+                        onClicked: {
+
+
+
+                        }
                     }
+
+
                 }
 
-                Rectangle
-                {
-                    color: "yellow"
-                    width: parent.width/4
-                    height: 200
-                    Text
-                    {
-                        anchors.centerIn: parent
-                        text: "Element 3"
-                        font.pointSize: 10
-                        color : "white"
-                    }
-                }
 
-                Rectangle
-                {
-                    color: "magenta"
-                    width: parent.width/4
-                    height: 200
-                    Text
-                    {
-                        anchors.centerIn: parent
-                        text: "Element 4"
-                        font.pointSize: 10
-                        color : "white"
-                    }
-                }
-                Rectangle
-                {
-                    color: "yellowgreen"
-                    width: parent.width/4
-                    height: 200
-                    Text
-                    {
-                        anchors.centerIn: parent
-                        text: "Element 5"
-                        font.pointSize: 10
-                        color : "white"
-                    }
-                }
-                Rectangle
-                {
-                    color: "red"
-                    width: parent.width/4
-                    height: 200
-                    Text
-                    {
-                        anchors.centerIn: parent
-                        text: "Element 6"
-                        font.pointSize: 10
-                        color : "white"
-                    }
-                }
-                Rectangle
-                {
-                    color: "beige"
-                    width: parent.width/4
-                    height: 200
-                    Text
-                    {
-                        anchors.centerIn: parent
-                        text: "Element 7"
-                        font.pointSize: 10
-                        color : "white"
-                    }
-                }
-                Rectangle
-                {
-                    color: "royalblue"
-                    width: parent.width/4
-                    height: 200
-                    Text
-                    {
-                        anchors.centerIn: parent
-                        text: "Element 8"
-                        font.pointSize: 10
-                        color : "white"
-                    }
-                }
 
 
 
@@ -226,6 +146,12 @@ Rectangle {
         input_dbbbb=manager.db_select_from_group()
 
         number_of_grops=input_dbbbb.length
+
+        input_product=manager.db_select_product()
+        number_of_product=input_product.length
+
+        //console.log(input_product)
+
 
         //        console.log(input_dbbbb)
         //        console.log(number_of_grops)
