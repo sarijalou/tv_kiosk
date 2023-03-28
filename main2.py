@@ -60,12 +60,12 @@ class Manager(QObject):
         return ressult
     
     
-    @Slot(result=list)
-    def  db_select_product(self):
+    @Slot(str,result=list)
+    def  db_select_product(self,group_name):
         
         database = r"my.db3"
         conn = sql_cmd.create_connection(database)
-        ressult=sql_cmd.select_product(conn)
+        ressult=sql_cmd.select_product(conn,group_name)
         conn.close()
         return ressult   
        

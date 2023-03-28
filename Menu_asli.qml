@@ -44,6 +44,9 @@ Rectangle {
 
                         onClicked: {
 
+                            input_product=manager.db_select_product(text)
+                            console.log(input_product)
+                            number_of_product=input_product.length
 
 
                         }
@@ -147,7 +150,9 @@ Rectangle {
 
         number_of_grops=input_dbbbb.length
 
-        input_product=manager.db_select_product()
+
+        input_product=manager.db_select_product("pizza")
+        console.log(input_product)
         number_of_product=input_product.length
 
         //console.log(input_product)

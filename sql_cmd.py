@@ -117,15 +117,17 @@ def delete_Groups(conn,name,img):
     cur.execute(sql,(name,img))
     conn.commit()
 
-def select_product(conn):
+def select_product(conn,name):
     """
     Create a new task
     :param conn:
     :param task:
     :return:
     """
+    
+    sql ="SELECT Product_name, Product_price,Product_image,Available FROM Products inner join Groups_tbl ON Groups_tbl.Group_id = Products.Group_id WHERE Group_name ='%s' ;" % (name)
 
-    sql ="SELECT  Product_name, Product_price,Product_image,Available FROM Products ;"
+    #sql ="SELECT  Product_name, Product_price,Product_image,Available FROM Products ;"
 
     cur = conn.cursor()
     cur.execute(sql)
@@ -137,9 +139,10 @@ def select_product(conn):
     return k
 
   
-        
+# SELECT  Product_name  , Product_price , Product_image  ,Available FROM Products where Group_id IN  (SELECT Group_id from Groups_tbl WHERE Group_name="pizza");
+# SELECT  Product_name  , Product_price , Product_image  ,Available FROM Products inner join Groups_tbl ON Groups_tbl.Group_id = Products.Group_id WHERE Group_name ="pizza" ;
 if __name__ == '__main__':
     database = r"my.db3"
     conn = create_connection(database)
-    delete_Groups(conn,"ساندویچ","file:///home/ata/Desktop/tv_robot/tv_kiosk/images/sandwich.png")
+    print(select_product(conn,'pizza'))
     conn.close()
