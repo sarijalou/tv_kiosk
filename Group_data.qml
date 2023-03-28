@@ -73,7 +73,7 @@ Rectangle
             // onAccepted: image.source = selectedFile
             nameFilters: ["png file(*.png)"]
             onAccepted: {
-                labaly.text=selectedFile
+                labaly.text=manager.copy_from_qml_png(selectedFile)
             }
         }
 

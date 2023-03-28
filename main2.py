@@ -1,4 +1,6 @@
 import sql_cmd
+import copy_png
+
 import sys
 
 from PySide6.QtCore import   QObject,Slot
@@ -19,6 +21,14 @@ class Manager(QObject):
     @Slot(result=str)
     def rett(self):
         return "kkkk"
+    
+    @Slot(str,result=str)
+    def copy_from_qml_png(self,input_dialog):
+        ress=copy_png.copy_file_png(input_dialog)
+        
+        return ress
+    
+    
 
     @Slot(str)
     def dbbbb(self,num):
