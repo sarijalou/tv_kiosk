@@ -8,7 +8,7 @@ Rectangle
 {
     property int number_of_grops:1
     property var input_dbbbb:[]
-    property var group_size: 20/100
+    property real group_size: 20/100
 
     Rectangle
     {
