@@ -1,45 +1,42 @@
-// Copyright (C) 2017 The Qt Company Ltd.
-// SPDX-License-Identifier: LicenseRef-Qt-Commercial OR BSD-3-Clause
-
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 2.15
-Item
-{
-    id: root
 
-    property alias  src:imgg.source
+Item {
+    id: root
+    height:width
+
+    property alias src: imgg.source
     property int duration: 250
     property alias text: label.text
     signal clicked
-//    property alias width: width
-//    property alias height: height
 
-height:width
-    Image
-    {
-        id:imgg
-        source: "images/pack.png"
-        signal clicked
-        anchors.centerIn:parent
-
-        width: parent.width*80/100
-        height: parent.height*80/100
-
-        Label
-        {
-            id: label
-
-            text: qsTr("Label")
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.top :parent.bottom
-            color: "#443224"
-            font.pixelSize: 10
-
-        }
+    Rectangle {
+        id: background
+        color: "#555555"
+        border.width: 1
+        border.color: "#000000"
+        radius: 5
+        anchors.fill: parent
     }
 
-    //! [0]
+    Image {
+        id: imgg
+        source: ""
+        anchors.centerIn: parent
+        width: parent.width * 80 / 100
+        height: parent.height * 80 / 100
+    }
+
+    Label {
+        id: label
+        text: ""
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: imgg.bottom
+        color: "#ffffff"
+        font.pixelSize: 10
+    }
+
     MouseArea {
         anchors.fill: parent
         onClicked: root.clicked()
@@ -49,12 +46,10 @@ height:width
             animation2.start()
         }
     }
-    //! [0]
 
     Rectangle {
         id: glow
         visible: false
-
         width: parent.width
         height: parent.height
         color: "#00000000"
@@ -62,8 +57,6 @@ height:width
         scale: 1.05
         border.color: "#ffffff"
     }
-
-
 
     PropertyAnimation {
         target: glow
@@ -123,7 +116,4 @@ height:width
             }
         }
     }
-
-
-
 }
