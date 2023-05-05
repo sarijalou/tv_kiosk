@@ -13,7 +13,7 @@ Item {
 
     Rectangle {
         id: background
-        color: "#555555"
+        color: "#55555500"
         border.width: 1
         border.color: "#000000"
         radius: 5
@@ -41,7 +41,6 @@ Item {
         anchors.fill: parent
         onClicked: root.clicked()
         onPressed: {
-            glow.visible = true
             animation1.start()
             animation2.start()
         }
@@ -54,7 +53,6 @@ Item {
         height: parent.height
         color: "#00000000"
         radius: 5
-        scale: 1.05
         border.color: "#ffffff"
     }
 
@@ -62,56 +60,75 @@ Item {
         target: glow
         id: animation1
         duration: root.duration
-        loops: 1
-        from: 1.05
+        from: 1.0
         to: 1.2
         property: "scale"
+        loops: 1
+        running: false
+        onRunningChanged: {
+            if (running) {
+                glow.visible = true
+            }
+        }
     }
 
     ParallelAnimation {
         id: animation2
+        PropertyAction {
+            target: glow
+            property: "opacity"
+            value: 0.0
+        }
         SequentialAnimation {
+            PropertyAction {
+                target: glow
+                property: "visible"
+                value: true
+            }
             PropertyAnimation {
                 target: glow
                 duration: root.duration
-                loops: 1
-                from: 0.2
+                from: 0.0
                 to: 1.0
                 property: "opacity"
             }
             PropertyAnimation {
                 target: glow
                 duration: root.duration
-                loops: 1
                 from: 1.0
                 to: 0.0
                 property: "opacity"
             }
-
             PropertyAction {
                 target: glow
                 property: "visible"
                 value: false
             }
         }
-
         SequentialAnimation {
             PropertyAction {
                 target: glow
                 property: "border.width"
-                value: 20
+                value: 0
             }
-
             PauseAnimation {
-                duration: 200
+                duration: 100
             }
-
             PropertyAnimation {
                 target: glow
                 duration: root.duration
-                loops: 1
+                from: 0
+                to: 20
+                property: "border.width"
+            }
+            PauseAnimation {
+                duration: 100
+            }
+            PropertyAnimation {
+                target: glow
+                duration: root.duration
                 from: 20
-                to: 10
+                to: 0
                 property: "border.width"
             }
         }
