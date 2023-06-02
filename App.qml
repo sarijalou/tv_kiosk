@@ -1,7 +1,7 @@
-import QtQuick 6.4
-import QtQuick.Window 6.4
-import QtQuick.VirtualKeyboard 6.4
-import QtQuick.Controls 6.4
+import QtQuick 6.5
+import QtQuick.Window 6.5
+import QtQuick.VirtualKeyboard 6.5
+import QtQuick.Controls 6.5
 
 
 Window {
@@ -132,9 +132,7 @@ Window {
         anchors.top: parent.top
          anchors.bottom: parent.bottom
         anchors.left: parent.left
-    }
-
-    
+    }   
 }
 
 

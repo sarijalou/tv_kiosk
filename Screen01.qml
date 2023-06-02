@@ -1,7 +1,7 @@
 
-import QtQuick 6.4
-import QtQuick.Controls 6.4
-import QtQuick3D 6.4
+import QtQuick 6.5
+import QtQuick.Controls 6.5
+import QtQuick3D 6.5
 //import UntitledProject
 //import Quick3DAssets.Mma_Kick 1.0
 

@@ -1,5 +1,5 @@
-import QtQuick 2.15
-import QtQuick.Controls 2.15
+import QtQuick 6.5
+import QtQuick.Controls 6.5
 
 
 
@@ -10,6 +10,7 @@ Rectangle {
     property real group_size: 30/100
     property var input_product: []
     property int number_of_product: 1
+    property int highlightedIndex: 0
 
 
     Rectangle
@@ -18,9 +19,7 @@ Rectangle {
         width: parent.width*group_size
         height:( parent.height*9)/10
         y:parent.height*1/10
-
-        color: "blue"
-
+        color: "red"
         Flickable
         {
             anchors.fill:parent
@@ -42,17 +41,23 @@ Rectangle {
                         //                    opacity:0.8
                         //                    src:"images/pizza.png"
 
-                        onClicked: {
+                        clr:
+                        { if(index === highlightedIndex )
+                                "brown" ;
+                            else
+                                "yellow";
+                        }
 
+
+
+                        onClicked:
+                        {
+                            highlightedIndex = index
                             input_product=manager.db_select_product(text)
                             console.log(input_product)
                             number_of_product=input_product.length
-
-
                         }
                     }
-
-
                 }
                 ScrollBar.vertical: ScrollBar{}
             }
@@ -124,20 +129,24 @@ Rectangle {
         height:parent.height/10
         color: 'green'
 
-        Button{
+        Button
+        {
             anchors.right: parent.right
             text: "back"
 
-            onClicked: {
+            onClicked:
+            {
                 ss1.push('Dogozine.qml')
             }
         }
 
-        Button{
+        Button
+        {
             anchors.left: parent.left
             text: "fara_karbar"
 
-            onClicked: {
+            onClicked:
+            {
                 ss1.push('Group_data.qml')
             }
         }

@@ -1,6 +1,6 @@
-import QtQuick 2.15
-import QtQuick.Controls 2.15
-import QtQuick.Layouts 2.15
+import QtQuick 6.5
+import QtQuick.Controls 6.5
+import QtQuick.Layouts 6.5
 
 Item {
     id: root
@@ -9,11 +9,12 @@ Item {
     property alias src: imgg.source
     property int duration: 250
     property alias text: label.text
+    property alias clr:background.color
     signal clicked
 
     Rectangle {
         id: background
-        color: "#55555500"
+        //color: "#555555ff"
         border.width: 1
         border.color: "#000000"
         radius: 5
