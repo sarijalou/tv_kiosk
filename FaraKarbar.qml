@@ -200,6 +200,7 @@ Rectangle
 
 //++++++++++++++++++++
 
+
     Rectangle
     {
         width:parent.width
@@ -236,6 +237,10 @@ Rectangle
         }
         }
     }
+
+
+
+    //++++++++++++++++++++++++++++++++++++++++++++++group_edit+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
     Rectangle
     {
@@ -415,7 +420,8 @@ Rectangle
     }
 
 
-
+    //++++++++++++++++++++++++++++++++++++++++++++ pruduct edit +++++++++++++++++++++++++++++++++++++++++++++++++
+    //++++++++++++++++++++++++++++++++++++++++++++ pruduct edit +++++++++++++++++++++++++++++++++++++++++++++++++
     Rectangle
     {
 
@@ -482,7 +488,7 @@ Rectangle
             //            color: "yellow"
             border.width: 1
             border.color: "black"
-            anchors.right: lbl_name.left
+            anchors.right: product_lbl_name.left
 
             TextInput
             {
@@ -503,10 +509,10 @@ Rectangle
         {
             id :product_btn_select
             text: "انتخاب"
-            anchors.right: lbl_ax.left
+            anchors.right: product_lbl_ax.left
             y:100
             onClicked: {
-                fileDialog.open()
+                fileDialog2.open()
             }
         }
 
@@ -514,12 +520,12 @@ Rectangle
         {
             width: 100
             height: 20
-            anchors.right: btn_select.left
+            anchors.right: product_btn_select.left
             y:100
             border.width: 1
             Label
             {
-                id:lbl_prduct
+                id:labaly2
                 anchors.fill: parent
             }
         }
@@ -560,7 +566,7 @@ Rectangle
 
         Image{
             id:imagekk
-            source: labaly.text
+            source: labaly2.text
             width: 100
             height: 100
             anchors.centerIn: parent
