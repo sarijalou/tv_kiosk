@@ -147,7 +147,7 @@ Rectangle {
 
             onClicked:
             {
-                ss1.push('Group_data.qml')
+                ss1.push('FaraKarbar.qml')
             }
         }
     }

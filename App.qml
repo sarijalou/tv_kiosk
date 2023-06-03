@@ -79,7 +79,7 @@ Window {
                 text: qsTr(" فرا کاربر")
                 width: parent.width
                 onClicked: {
-                    ss1.push("Group_data.qml")
+                    ss1.push("FaraKarbar.qml")
                     drawer.close()
                 }
             }
