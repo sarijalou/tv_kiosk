@@ -42,7 +42,12 @@ def insert_group(conn, name,img,radif):
     cur.execute(sql,(name,img,radif))
     conn.commit()
     # return cur.lastrowid
-    
+def insert_product(conn, name,img,pricee,group_id,Available):
+    sql = 'INSERT INTO Groups_tbl (Product_name,Product_image,Product_price,Group_id,Available) VALUES (?,?,?,?,?);'
+    cur = conn.cursor()
+    cur.execute(sql,(name,img,radif))
+    conn.commit()
+   
 def select_group(conn):
     """
     Create a new task
