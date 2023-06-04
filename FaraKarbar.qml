@@ -2,131 +2,116 @@ import QtQuick 6.5
 import QtQuick.Controls 6.5
 import QtQuick.Dialogs
 
-
-
-Rectangle
+Item
 {
-    property int number_of_grops:1
-    property var input_dbbbb:[]
-    property real group_size: 20/100
-    property int highlightedIndex: 0
 
-    property var input_product: []
-    property int number_of_product: 1
+    property real group_size: 20/100  //(GUI)  size of group
 
+    property int highlightedIndex: 0  // for highlite index in group
 
+    property int number_of_grops:-1
+    property var group_db_read:[]
 
+    property int number_of_product: -1
+    property var product_db_read: []
+
+    //+++++++++++++++++++++++++++++++++++++++++++++++ group_rect ++++++++++++++++++++++++++++++++++++++++++++++++++++
     Rectangle
     {
-        id:fl1
+        id:group_rect_id
         width: parent.width*group_size
         height:( parent.height*9)/10
         y:parent.height*1/10
-
         color: "blue"
-
-
-
-
-
 
         Flickable
         {
             anchors.fill:parent
-            contentHeight: mColumnId.implicitHeight
+            contentHeight: group_colomn_id.implicitHeight
 
             Column
             {
-                id : mColumnId
+                id : group_colomn_id
                 anchors.fill: parent
 
-                Repeater {
+                Repeater
+                {
                     model: number_of_grops+1
                     QrpBtn
                     {
-                        width:fl1.width
-                        //height: fl1.height
+                        width:group_rect_id.width
+                        //height: group_rect_id.height
 
                         text:
+                        {
                             if (index === number_of_grops)
                             {
                                 "add" ;
                             }
                             else
                             {
-
-                                input_dbbbb[index][0];
+                                group_db_read[index][0];
                             }
-
+                        }
                         src:
+                        {
                             if (index === number_of_grops)
                             {
                                 ".img/add_btn.png" ;
                             }
                             else
                             {
-                                input_dbbbb[index][1];
-
+                                group_db_read[index][1];
                             }
-
-
-
+                        }
                         clr:
-                        { if(index === highlightedIndex )
+                        {
+                            if(index === highlightedIndex )
                                 "yellow" ;
                             else
                                 "blue";
                         }
-
-
-                        onClicked: {
+                        onClicked:
+                        {
                             highlightedIndex=index
-
 
                             if (index === number_of_grops)
                             {
-                               group_edit.visible=true
-                                input_name.text=""
-                                labaly.text=""
+                                group_edit_rect_id.visible=true
                                 input_radif.text=index
                             }
                             else
                             {
-
-                            input_name.text=text
-                            labaly.text=src
-                            input_radif.text=index
-
-                            input_product=manager.db_select_product(text)
-                            console.log(input_product)
-                            number_of_product=input_product.length
+                                input_radif.text=index
+                                product_db_read=manager.db_select_product(text)
+                                console.log(product_db_read)
+                                number_of_product=product_db_read.length
                             }
-
                         }
                     }
                 }
-
             }
             ScrollBar.vertical: ScrollBar{}
         }
     }
 
+    //+++++++++++++++++++++++++++++++++++++++++++++++ product_rect ++++++++++++++++++++++++++++++++++++++++++++++++++++
     Rectangle
-    {        id:fl22
-        anchors.left: fl1.right
+    {
+        anchors.left: group_rect_id.right
         width: parent.width*(1-group_size)
         height: parent.height*9/10
         y:parent.height*1/10
         color: 'beige'
-        visible: true
+
         Flickable
         {
             anchors.fill:parent
-            contentHeight: nColumnId.implicitHeight//+400
+            contentHeight: product_grid_id.implicitHeight//+400
 
             Grid
             {
-                id : nColumnId
+                id : product_grid_id
                 anchors.fill: parent
                 columns: 3
                 //spacing: 10
@@ -139,7 +124,6 @@ Rectangle
                     {
                         width:parent.width/3
 
-
                         text:
                             if (index === number_of_product)
                             {
@@ -147,8 +131,7 @@ Rectangle
                             }
                             else
                             {
-
-                               input_product[index][0];
+                                product_db_read[index][0];
                             }
 
                         src:
@@ -158,49 +141,30 @@ Rectangle
                             }
                             else
                             {
-                                input_product[index][2];
-
+                                product_db_read[index][2];
                             }
 
-                        //height: fl1.height
-                        price:input_product[index][1]
+                        //height: group_rect_id.height
+                        price:product_db_read[index][1]
                         //                    text: "pizza"
                         //                    opacity:0.8
                         //                    src:"images/pizza.png"
 
-                        onClicked: {
-
-
+                        onClicked:
+                        {
                             if (index === number_of_product)
                             {
-                               product_edit.visible=true
-
+                                product_edit_rect_id.visible=true
                             }
-
-
-
                         }
                     }
-
-
                 }
-
-
-
-
-
             }
-
             ScrollBar.vertical: ScrollBar{}
         }
-
-
-
     }
 
-//++++++++++++++++++++
-
-
+    //+++++++++++++++++++++++++++++++++++++++++++++++ control_rect ++++++++++++++++++++++++++++++++++++++++++++++++++++
     Rectangle
     {
         width:parent.width
@@ -209,113 +173,84 @@ Rectangle
         Row
         {
             spacing: 20
-        Button{
-            width: 80
-//            anchors.left: parent.left
-            text: "menu_asli"
+            Button{
+                width: 80
+                //            anchors.left: parent.left
+                text: "menu_asli"
 
-            onClicked: {
-                ss1.push('Menu_asli.qml')
+                onClicked: {
+                    ss1.push('Menu_asli.qml')
+                }
             }
-        }
 
-        Button{
-            width: 80
+            Button{
+                width: 80
 
-//            anchors.left: parent.left
-            text: "ویرایش گروه"
+                //            anchors.left: parent.left
+                text: "ویرایش گروه"
 
-            onClicked: {
-
-            if(group_edit.visible)
-                            group_edit.visible=0;
-            else
-                group_edit.visible=1;
-
-
+                onClicked:
+                {
+                    if(group_edit_rect_id.visible)
+                        group_edit_rect_id.visible=0;
+                    else
+                        group_edit_rect_id.visible=1;
+                }
             }
-        }
         }
     }
-
-
 
     //++++++++++++++++++++++++++++++++++++++++++++++group_edit+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
     Rectangle
     {
-
-        id:group_edit
+        id:group_edit_rect_id
         width: parent.width*9/10
         height: parent.height*9/10
         anchors.centerIn: parent
-
         color: "lightgray"
         radius: 10
         visible:false
-
-        gradient: Gradient {
-            GradientStop { position: 0; color: "#DDDDDD" }
-            GradientStop { position: 0.5; color: "#BBBBBB" }
-            GradientStop { position: 1; color: "#AAAAAA" }
-        }
-
-        Rectangle {
-            width: parent.width - 6
-            height: parent.height - 6
-            color: "transparent"
-            border.color: "#FFFFFF" // Highlight color
-            border.width: 3 // Highlight width
-            radius: parent.radius - (border.width / 2) // Match parent's corner radius
-            anchors.centerIn: parent
-        }
-
-
-
-
-
-        //visible: false
 
         Button
         {
             text: "خروج"
             onClicked: parent.visible=false
-
-        }
-
-
-
-        FileDialog {
-            id: fileDialog
-            //            currentFolder: StandardPaths.standardLocations(StandardPaths.PicturesLocation)[0]
-            // onAccepted: image.source = selectedFile
-            nameFilters: ["png file(*.png)"]
-            onAccepted: {
-                labaly.text=manager.copy_from_qml_png(selectedFile)
-            }
         }
 
         Label
         {
-            id:lbl_name
+            id:group_edit_group_lbl_name_id
             text: "نام گروه:"
             anchors.right:    parent.right
+        }
+
+
+        FileDialog
+        {
+            id: group_edit_fileDialog_id
+            //            currentFolder: StandardPaths.standardLocations(StandardPaths.PicturesLocation)[0]
+            // onAccepted: image.source = selectedFile
+            nameFilters: ["png file(*.png)"]
+            onAccepted:
+            {
+                group_edit_img_lbl_id.text=manager.copy_from_qml_png(selectedFile)
+            }
         }
         Rectangle
         {
             width: 200
             height: 20
-            //            color: "yellow"
             border.width: 1
             border.color: "black"
-            anchors.right: lbl_name.left
-
+            anchors.right: group_edit_group_lbl_name_id.left
             TextInput
             {
                 id:input_name
                 anchors.fill:    parent
             }
         }
+
 
 
         Label
@@ -331,8 +266,9 @@ Rectangle
             text: "انتخاب"
             anchors.right: lbl_ax.left
             y:100
-            onClicked: {
-                fileDialog.open()
+            onClicked:
+            {
+                group_edit_fileDialog_id.open()
             }
         }
 
@@ -343,29 +279,29 @@ Rectangle
             anchors.right: btn_select.left
             y:100
             border.width: 1
+            color: "blue"
             Label
             {
-                id:labaly
+                id:group_edit_img_lbl_id
                 anchors.fill: parent
             }
         }
 
         Button
         {
-            id :btn_sabt
             text: "ثبت"
             anchors.bottom: parent.bottom
             anchors.right: parent.right
             y:175
             onClicked: {
-                manager.db_delete_Groups(input_name.text,labaly.text)
+                manager.db_delete_Groups(input_name.text,group_edit_img_lbl_id.text)
 
-                manager.db_insert_to_group( input_name.text,labaly.text,input_radif.text)
+                manager.db_insert_to_group( input_name.text,group_edit_img_lbl_id.text,input_radif.text)
 
-                input_dbbbb=manager.db_select_from_group()
-                number_of_grops=input_dbbbb.length
+                group_db_read=manager.db_select_from_group()
+                number_of_grops=group_db_read.length
                 input_name.text=''
-                labaly.text=''
+                group_edit_img_lbl_id.text=''
                 input_radif.text='0'
             }
         }
@@ -376,18 +312,18 @@ Rectangle
             anchors.bottom: parent.bottom
             y:175
             onClicked: {
-                manager.db_delete_Groups(input_name.text,labaly.text)
-                input_dbbbb=manager.db_select_from_group()
-                number_of_grops=input_dbbbb.length
+                manager.db_delete_Groups(input_name.text,group_edit_img_lbl_id.text)
+                group_db_read=manager.db_select_from_group()
+                number_of_grops=group_db_read.length
                 input_name.text=''
-                labaly.text=''
+                group_edit_img_lbl_id.text=''
                 input_radif.text='0'
             }
         }
 
         Image{
             id:imagek
-            source: labaly.text
+            source: group_edit_img_lbl_id.text
             width: 100
             height: 100
             anchors.centerIn: parent
@@ -425,7 +361,7 @@ Rectangle
     Rectangle
     {
 
-        id:product_edit
+        id:product_edit_rect_id
         width: parent.width*9/10
         height: parent.height*9/10
         anchors.centerIn: parent
@@ -434,27 +370,6 @@ Rectangle
         radius: 10
         visible:false
 
-//        gradient: Gradient {
-//            GradientStop { position: 0; color: "#DDDDDD" }
-//            GradientStop { position: 0.5; color: "#BBBBBB" }
-//            GradientStop { position: 1; color: "#AAAAAA" }
-//        }
-
-        Rectangle {
-            width: parent.width - 6
-            height: parent.height - 6
-            color: "transparent"
-            border.color: "#FFFFFF" // Highlight color
-            border.width: 3 // Highlight width
-            radius: parent.radius - (border.width / 2) // Match parent's corner radius
-            anchors.centerIn: parent
-        }
-
-
-
-
-
-        //visible: false
 
         Button
         {
@@ -463,21 +378,9 @@ Rectangle
 
         }
 
-
-
-        FileDialog {
-            id: fileDialog2
-            //            currentFolder: StandardPaths.standardLocations(StandardPaths.PicturesLocation)[0]
-            // onAccepted: image.source = selectedFile
-            nameFilters: ["png file(*.png)"]
-            onAccepted: {
-                lbl_prduct.text=manager.copy_from_qml_png(selectedFile)
-            }
-        }
-
         Label
         {
-            id:product_lbl_name
+            id:product_name_lbl_id
             text: "نام محصول:"
             anchors.right:    parent.right
         }
@@ -485,10 +388,9 @@ Rectangle
         {
             width: 200
             height: 20
-            //            color: "yellow"
             border.width: 1
             border.color: "black"
-            anchors.right: product_lbl_name.left
+            anchors.right: product_name_lbl_id.left
 
             TextInput
             {
@@ -497,7 +399,17 @@ Rectangle
             }
         }
 
-
+        FileDialog
+        {
+            id: product_fileDialog_id
+            //            currentFolder: StandardPaths.standardLocations(StandardPaths.PicturesLocation)[0]
+            // onAccepted: image.source = selectedFile
+            nameFilters: ["png file(*.png)"]
+            onAccepted:
+            {
+                product_img_lbl_id.text=manager.copy_from_qml_png(selectedFile)
+            }
+        }
         Label
         {
             id:product_lbl_ax
@@ -512,7 +424,7 @@ Rectangle
             anchors.right: product_lbl_ax.left
             y:100
             onClicked: {
-                fileDialog2.open()
+                product_fileDialog_id.open()
             }
         }
 
@@ -525,9 +437,15 @@ Rectangle
             border.width: 1
             Label
             {
-                id:labaly2
+                id:product_img_lbl_id
                 anchors.fill: parent
             }
+        }
+        Image{
+            source: product_img_lbl_id.text
+            width: 100
+            height: 100
+            anchors.centerIn: parent
         }
 
         Button
@@ -536,81 +454,42 @@ Rectangle
             anchors.bottom: parent.bottom
             anchors.right: parent.right
             y:175
-//            onClicked: {
-//                manager.db_delete_Groups(input_name.text,labaly.text)
+            //            onClicked: {
+            //                manager.db_delete_Groups(input_name2.text,labaly.text)
 
-//                manager.db_insert_to_group( input_name.text,labaly.text,input_radif.text)
+            //                manager.db_insert_to_group( input_name2.text,labaly.text,input_radif.text)
 
-//                input_dbbbb=manager.db_select_from_group()
-//                number_of_grops=input_dbbbb.length
-//                input_name.text=''
-//                labaly.text=''
-//                input_radif.text='0'
-//            }
+            //                group_db_read=manager.db_select_from_group()
+            //                number_of_grops=group_db_read.length
+            //                input_name2.text=''
+            //                labaly.text=''
+            //                input_radif.text='0'
+            //            }
         }
 
         Button
         {
             text: "حذف"
             anchors.bottom: parent.bottom
-            y:175
-//            onClicked: {
-//                manager.db_delete_Groups(input_name.text,labaly.text)
-//                input_dbbbb=manager.db_select_from_group()
-//                number_of_grops=input_dbbbb.length
-//                input_name.text=''
-//                labaly.text=''
-//                input_radif.text='0'
-//            }
+            //            onClicked: {
+            //                manager.db_delete_Groups(input_name2.text,labaly.text)
+            //                group_db_read=manager.db_select_from_group()
+            //                number_of_grops=group_db_read.length
+            //                input_name2.text=''
+            //                labaly.text=''
+            //                input_radif.text='0'
+            //            }
         }
-
-        Image{
-            id:imagekk
-            source: labaly2.text
-            width: 100
-            height: 100
-            anchors.centerIn: parent
-
-        }
-
-//        Label
-//        {
-//            id:lbl_radif
-//            text: "ردیف:"
-//            anchors.right:    parent.right
-//            anchors.top: imagek.bottom
-//        }
-//        Rectangle
-//        {
-//            width: 200
-//            height: 20
-//            //            color: "yellow"
-//            border.width: 1
-//            border.color: "black"
-//            anchors.right: lbl_radif.left
-//            anchors.top: imagek.bottom
-
-//            TextInput
-//            {
-//                id:input_radif
-//                anchors.fill:    parent
-//            }
-//        }
     }
 
 
-
+    //++++++++++++++++++++++++++++++++++++++++++++ Component.onCompleted +++++++++++++++++++++++++++++++++++++++++++++++++
     Component.onCompleted:
     {
-
-
-        input_dbbbb=manager.db_select_from_group()
-
-        number_of_grops=input_dbbbb.length
-
-        //        console.log(input_dbbbb)
-        //        console.log(number_of_grops)
-
+        group_db_read=manager.db_select_from_group()
+        number_of_grops=group_db_read.length
+        product_db_read=manager.db_select_product(group_db_read[0][0])
+        number_of_product=product_db_read.length
     }
 }
 

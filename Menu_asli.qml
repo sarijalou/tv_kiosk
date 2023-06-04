@@ -153,23 +153,10 @@ Rectangle {
     }
     Component.onCompleted:
     {
-
-
         input_dbbbb=manager.db_select_from_group()
-
         number_of_grops=input_dbbbb.length
-
-
-        input_product=manager.db_select_product("pizza")
-        console.log(input_product)
+        input_product=manager.db_select_product(input_dbbbb[0][0])
         number_of_product=input_product.length
-
-        //console.log(input_product)
-
-
-        //        console.log(input_dbbbb)
-        //        console.log(number_of_grops)
-
     }
 }
 
