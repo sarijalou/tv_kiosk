@@ -47,9 +47,20 @@ class Manager(QObject):
         
         database = r"my.db3"
         conn = sql_cmd.create_connection(database)
-        print(radif,int(radif))
+        
         sql_cmd.insert_group(conn,name,img,int(radif))
         conn.close()
+    
+    
+    @Slot(str,str,str,str,str)
+    def db_insert_to_product(self,name,img,pricee,group_id,Available):
+        
+        database = r"my.db3"
+        conn = sql_cmd.create_connection(database)
+        
+        sql_cmd.insert_product(conn,name,img,float(pricee),int(group_id),int(Available))
+        conn.close()
+    
     
     @Slot(str,str)    
     def db_delete_Groups(self,name,img):

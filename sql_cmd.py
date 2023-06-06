@@ -43,8 +43,8 @@ def insert_group(conn, name,img,radif):
     cur.execute(sql,(name,img,radif))
     conn.commit()
     # return cur.lastrowid
-def insert_product(conn, name,img,pricee,group_id,Available):
-    sql = 'INSERT INTO Groups_tbl (Product_name,Product_image,Product_price,Group_id,Available) VALUES (?,?,?,?,?);'
+def insert_product(conn,name,img,pricee,group_id,Available):
+    sql = 'INSERT INTO Products (Product_name,Product_image,Product_price,Group_id,Available) VALUES (?,?,?,?,?);'
     cur = conn.cursor()
     cur.execute(sql,(name,img,pricee,group_id,Available))
     conn.commit()
@@ -124,12 +124,10 @@ def delete_Groups(conn,name,img):
     conn.commit()
 
 def select_product(conn,name):
-    """
-    Create a new task
-    :param conn:
-    :param task:
-    :return:
-    """
+    '''
+    vooroodi nam goorooh
+    khoorooji mahsoolat an goorooh
+    '''
     
     sql ="SELECT Product_name, Product_price,Product_image,Available FROM Products inner join Groups_tbl ON Groups_tbl.Group_id = Products.Group_id WHERE Group_name ='%s' ;" % (name)
 

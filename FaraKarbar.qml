@@ -421,11 +421,31 @@ Item
 
                 TextInput
                 {
-                    id:input_name2
+                    id:product_edit_name_input_id
                     anchors.fill:    parent
                 }
             }
-
+            Label
+            {
+                id:product_price_lbl_id
+                text: "قیمت محصول:"
+                anchors.right:    parent.right
+                y:50
+            }
+            Rectangle
+            {
+                width: 200
+                height: 20
+                border.width: 1
+                border.color: "black"
+                anchors.right: product_price_lbl_id.left
+                y:50
+                TextInput
+                {
+                    id:product_edit_price_input_id
+                    anchors.fill:    parent
+                }
+            }
             FileDialog
             {
                 id: product_fileDialog_id
@@ -481,17 +501,21 @@ Item
                 anchors.bottom: parent.bottom
                 anchors.right: parent.right
                 y:175
-                //            onClicked: {
-                //                manager.db_delete_Groups(input_name2.text,labaly.text)
+                           onClicked: {
+                //            manager.db_delete_Groups(product_edit_name_input_id.text,labaly.text)
 
-                //                manager.db_insert_to_group( input_name2.text,labaly.text,input_radif.text)
+                            manager.db_insert_to_product( product_edit_name_input_id.text,product_img_lbl_id.text,product_edit_price_input_id.text,'44','1')
+                               //def db_insert_to_product(self,name,img,pricee,group_id,Available)
+
+                               product_db_read=manager.db_select_product(group_edit_input_name_id.text)
+                               number_of_product=product_db_read.length
 
                 //                group_db_read=manager.db_select_from_group()
                 //                number_of_grops=group_db_read.length
-                //                input_name2.text=''
+                //                product_edit_name_input_id.text=''
                 //                labaly.text=''
                 //                input_radif.text='0'
-                //            }
+                           }
             }
 
             Button
@@ -499,10 +523,10 @@ Item
                 text: "حذف"
                 anchors.bottom: parent.bottom
                 //            onClicked: {
-                //                manager.db_delete_Groups(input_name2.text,labaly.text)
+                //                manager.db_delete_Groups(product_edit_name_input_id.text,labaly.text)
                 //                group_db_read=manager.db_select_from_group()
                 //                number_of_grops=group_db_read.length
-                //                input_name2.text=''
+                //                product_edit_name_input_id.text=''
                 //                labaly.text=''
                 //                input_radif.text='0'
                 //            }
