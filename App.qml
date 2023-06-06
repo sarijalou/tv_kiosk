@@ -8,10 +8,10 @@ Window {
     id: root
     width: Screen.width*2/3
     height: Screen.height/1.2
-    
+    visible: true
+
     //visibility: "FullScreen"
 
-    visible: true
     /*
     ToolBar {
         id: toolBar
@@ -40,23 +40,23 @@ Window {
     }
 */
 
-  
+
     StackView {
         id: ss1
         width:parent.width/2
-         anchors.top: parent.top
-         anchors.right: parent.right
-         anchors.bottom: parent.bottom
+        anchors.top: parent.top
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
         //anchors.left: parent.left
         initialItem: Menu_asli {}
     }
 
-        InputPanel {
+    InputPanel {
         id: inputPanel
         property bool showKeyboard :  active
-    y: showKeyboard ? parent.height - height : parent.height
-       //y:200
-         Behavior on y {
+        y: showKeyboard ? parent.height - height : parent.height
+        //y:200
+        Behavior on y {
             NumberAnimation {
                 duration: 200
                 easing.type: Easing.InOutQuad
@@ -126,13 +126,13 @@ Window {
         }
     }
 
-      Screen01 {
+    Screen01 {
         id: mainScreen
         width:parent.width/2
         anchors.top: parent.top
-         anchors.bottom: parent.bottom
+        anchors.bottom: parent.bottom
         anchors.left: parent.left
-    }   
+    }
 }
 
 

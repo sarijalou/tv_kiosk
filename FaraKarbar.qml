@@ -22,7 +22,6 @@ Item
         width: parent.width*group_size
         height:( parent.height*9)/10
         y:parent.height*1/10
-        color: "blue"
 
         Flickable
         {
@@ -37,10 +36,11 @@ Item
                 Repeater
                 {
                     model: number_of_grops+1
+
                     QrpBtn
                     {
-                        width:group_rect_id.width
-                        //height: group_rect_id.height
+
+                        width:group_colomn_id.width
 
                         text:
                         {
@@ -75,10 +75,15 @@ Item
                         {
                             highlightedIndex=index
 
-                            if (index === number_of_grops)
+                            if (index === number_of_grops) // add group
                             {
-                                group_edit_rect_id.visible=true
+                                group_edit_dialog_id.open()
+
                                 input_radif.text=index
+
+
+                                group_edit_input_name_id.text=''
+                                group_edit_img_lbl_id.text=''
                             }
                             else
                             {
@@ -86,6 +91,11 @@ Item
                                 product_db_read=manager.db_select_product(text)
                                 console.log(product_db_read)
                                 number_of_product=product_db_read.length
+
+
+
+                                group_edit_input_name_id.text=text
+                                group_edit_img_lbl_id.text=src
                             }
                         }
                     }
@@ -152,9 +162,9 @@ Item
 
                         onClicked:
                         {
-                            if (index === number_of_product)
+                            if (index === number_of_product) //if add product button clicked
                             {
-                                product_edit_rect_id.visible=true
+                                product_edit_dialog_id.open()
                             }
                         }
                     }
@@ -191,10 +201,12 @@ Item
 
                 onClicked:
                 {
-                    if(group_edit_rect_id.visible)
-                        group_edit_rect_id.visible=0;
-                    else
-                        group_edit_rect_id.visible=1;
+                    group_edit_dialog_id.open()
+
+                    //                    if(group_edit_dialog_id.visible)
+                    //                        group_edit_dialog_id.visible=0;
+                    //                    else
+                    //                        group_edit_dialog_id.visible=1;
                 }
             }
         }
@@ -202,283 +214,299 @@ Item
 
     //++++++++++++++++++++++++++++++++++++++++++++++group_edit+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-    Rectangle
+    Dialog
     {
-        id:group_edit_rect_id
+        id:group_edit_dialog_id
         width: parent.width*9/10
         height: parent.height*9/10
         anchors.centerIn: parent
-        color: "lightgray"
-        radius: 10
-        visible:false
+        title: "change group INFO"
+        modal: true
+        // standardButtons: Dialog.Accepted
 
-        Button
-        {
-            text: "خروج"
-            onClicked: parent.visible=false
-        }
-
-        Label
-        {
-            id:group_edit_group_lbl_name_id
-            text: "نام گروه:"
-            anchors.right:    parent.right
-        }
-
-
-        FileDialog
-        {
-            id: group_edit_fileDialog_id
-            //            currentFolder: StandardPaths.standardLocations(StandardPaths.PicturesLocation)[0]
-            // onAccepted: image.source = selectedFile
-            nameFilters: ["png file(*.png)"]
-            onAccepted:
-            {
-                group_edit_img_lbl_id.text=manager.copy_from_qml_png(selectedFile)
-            }
-        }
+        //contentItem: Rectangle
         Rectangle
         {
-            width: 200
-            height: 20
-            border.width: 1
-            border.color: "black"
-            anchors.right: group_edit_group_lbl_name_id.left
-            TextInput
+            anchors.fill: parent
+            color: "yellow"
+            radius: 10
+
+            Button
             {
-                id:input_name
-                anchors.fill:    parent
+                text: "خروج"
+                onClicked: group_edit_dialog_id.close()
             }
-        }
 
-
-
-        Label
-        {
-            id:lbl_ax
-            text: "عکس گروه"
-            anchors.right:    parent.right
-            y:100
-        }
-        Button
-        {
-            id :btn_select
-            text: "انتخاب"
-            anchors.right: lbl_ax.left
-            y:100
-            onClicked:
-            {
-                group_edit_fileDialog_id.open()
-            }
-        }
-
-        Rectangle
-        {
-            width: 100
-            height: 20
-            anchors.right: btn_select.left
-            y:100
-            border.width: 1
-            color: "blue"
             Label
             {
-                id:group_edit_img_lbl_id
-                anchors.fill: parent
+                id:group_edit_group_lbl_name_id
+                text: "نام گروه:"
+                anchors.right:    parent.right
             }
-        }
 
-        Button
-        {
-            text: "ثبت"
-            anchors.bottom: parent.bottom
-            anchors.right: parent.right
-            y:175
-            onClicked: {
-                manager.db_delete_Groups(input_name.text,group_edit_img_lbl_id.text)
 
-                manager.db_insert_to_group( input_name.text,group_edit_img_lbl_id.text,input_radif.text)
-
-                group_db_read=manager.db_select_from_group()
-                number_of_grops=group_db_read.length
-                input_name.text=''
-                group_edit_img_lbl_id.text=''
-                input_radif.text='0'
-            }
-        }
-
-        Button
-        {
-            text: "حذف"
-            anchors.bottom: parent.bottom
-            y:175
-            onClicked: {
-                manager.db_delete_Groups(input_name.text,group_edit_img_lbl_id.text)
-                group_db_read=manager.db_select_from_group()
-                number_of_grops=group_db_read.length
-                input_name.text=''
-                group_edit_img_lbl_id.text=''
-                input_radif.text='0'
-            }
-        }
-
-        Image{
-            id:imagek
-            source: group_edit_img_lbl_id.text
-            width: 100
-            height: 100
-            anchors.centerIn: parent
-
-        }
-
-        Label
-        {
-            id:lbl_radif
-            text: "ردیف:"
-            anchors.right:    parent.right
-            anchors.top: imagek.bottom
-        }
-        Rectangle
-        {
-            width: 200
-            height: 20
-            //            color: "yellow"
-            border.width: 1
-            border.color: "black"
-            anchors.right: lbl_radif.left
-            anchors.top: imagek.bottom
-
-            TextInput
+            FileDialog
             {
-                id:input_radif
-                anchors.fill:    parent
+                id: group_edit_fileDialog_id
+                //            currentFolder: StandardPaths.standardLocations(StandardPaths.PicturesLocation)[0]
+                // onAccepted: image.source = selectedFile
+                nameFilters: ["png file(*.png)"]
+                onAccepted:
+                {
+                    group_edit_img_lbl_id.text=manager.copy_from_qml_png(selectedFile)
+                }
             }
+            Rectangle
+            {
+                width: 200
+                height: 20
+                border.width: 1
+                border.color: "black"
+                anchors.right: group_edit_group_lbl_name_id.left
+                TextInput
+                {
+                    id:group_edit_input_name_id
+                    anchors.fill:    parent
+                }
+            }
+
+
+
+            Label
+            {
+                id:lbl_ax
+                text: "عکس گروه"
+                anchors.right:    parent.right
+                y:100
+            }
+            Button
+            {
+                id :btn_select
+                text: "انتخاب"
+                anchors.right: lbl_ax.left
+                y:100
+                onClicked:
+                {
+                    group_edit_fileDialog_id.open()
+                }
+            }
+
+            Rectangle
+            {
+                width: 100
+                height: 20
+                anchors.right: btn_select.left
+                y:100
+                border.width: 1
+                color: "blue"
+                Label
+                {
+                    id:group_edit_img_lbl_id
+                    anchors.fill: parent
+                }
+            }
+
+            Button
+            {
+                text: "ثبت"
+                anchors.bottom: parent.bottom
+                anchors.right: parent.right
+                y:175
+                onClicked: {
+                    manager.db_delete_Groups(group_edit_input_name_id.text,group_edit_img_lbl_id.text)
+
+                    manager.db_insert_to_group( group_edit_input_name_id.text,group_edit_img_lbl_id.text,input_radif.text)
+
+                    group_db_read=manager.db_select_from_group()
+                    number_of_grops=group_db_read.length
+                    group_edit_input_name_id.text=''
+                    group_edit_img_lbl_id.text=''
+                    input_radif.text='0'
+                }
+            }
+
+            Button
+            {
+                text: "حذف"
+                anchors.bottom: parent.bottom
+                y:175
+                onClicked: {
+                    manager.db_delete_Groups(group_edit_input_name_id.text,group_edit_img_lbl_id.text)
+                    group_db_read=manager.db_select_from_group()
+                    number_of_grops=group_db_read.length
+                    group_edit_input_name_id.text=''
+                    group_edit_img_lbl_id.text=''
+                    input_radif.text='0'
+                }
+            }
+
+            Image{
+                id:imagek
+                source: group_edit_img_lbl_id.text
+                width: 100
+                height: 100
+                anchors.centerIn: parent
+
+            }
+
+            Label
+            {
+                id:lbl_radif
+                text: "ردیف:"
+                anchors.right:    parent.right
+                anchors.top: imagek.bottom
+            }
+            Rectangle
+            {
+                width: 200
+                height: 20
+                //            color: "yellow"
+                border.width: 1
+                border.color: "black"
+                anchors.right: lbl_radif.left
+                anchors.top: imagek.bottom
+
+                TextInput
+                {
+                    id:input_radif
+                    anchors.fill:    parent
+                }
+            }
+
         }
     }
 
 
     //++++++++++++++++++++++++++++++++++++++++++++ pruduct edit +++++++++++++++++++++++++++++++++++++++++++++++++
     //++++++++++++++++++++++++++++++++++++++++++++ pruduct edit +++++++++++++++++++++++++++++++++++++++++++++++++
-    Rectangle
+    Dialog
     {
 
-        id:product_edit_rect_id
+        id:product_edit_dialog_id
         width: parent.width*9/10
         height: parent.height*9/10
         anchors.centerIn: parent
 
-        color: "lightblue"
-        radius: 10
-        visible:false
 
+        title: "change product INFO"
+        modal: true
+        // standardButtons: Dialog.Accepted
 
-        Button
-        {
-            text: "خروج"
-            onClicked: parent.visible=false
-
-        }
-
-        Label
-        {
-            id:product_name_lbl_id
-            text: "نام محصول:"
-            anchors.right:    parent.right
-        }
+        //contentItem: Rectangle
         Rectangle
         {
-            width: 200
-            height: 20
-            border.width: 1
-            border.color: "black"
-            anchors.right: product_name_lbl_id.left
-
-            TextInput
+            anchors.fill: parent
+            color: "lightblue"
+            radius: 10
+            Button
             {
-                id:input_name2
-                anchors.fill:    parent
-            }
-        }
+                text: "خروج"
+                onClicked: product_edit_dialog_id.close()
 
-        FileDialog
-        {
-            id: product_fileDialog_id
-            //            currentFolder: StandardPaths.standardLocations(StandardPaths.PicturesLocation)[0]
-            // onAccepted: image.source = selectedFile
-            nameFilters: ["png file(*.png)"]
-            onAccepted:
-            {
-                product_img_lbl_id.text=manager.copy_from_qml_png(selectedFile)
             }
-        }
-        Label
-        {
-            id:product_lbl_ax
-            text: "عکس محصول"
-            anchors.right:    parent.right
-            y:100
-        }
-        Button
-        {
-            id :product_btn_select
-            text: "انتخاب"
-            anchors.right: product_lbl_ax.left
-            y:100
-            onClicked: {
-                product_fileDialog_id.open()
-            }
-        }
 
-        Rectangle
-        {
-            width: 100
-            height: 20
-            anchors.right: product_btn_select.left
-            y:100
-            border.width: 1
             Label
             {
-                id:product_img_lbl_id
-                anchors.fill: parent
+                id:product_name_lbl_id
+                text: "نام محصول:"
+                anchors.right:    parent.right
             }
-        }
-        Image{
-            source: product_img_lbl_id.text
-            width: 100
-            height: 100
-            anchors.centerIn: parent
-        }
+            Rectangle
+            {
+                width: 200
+                height: 20
+                border.width: 1
+                border.color: "black"
+                anchors.right: product_name_lbl_id.left
 
-        Button
-        {
-            text: "ثبت"
-            anchors.bottom: parent.bottom
-            anchors.right: parent.right
-            y:175
-            //            onClicked: {
-            //                manager.db_delete_Groups(input_name2.text,labaly.text)
+                TextInput
+                {
+                    id:input_name2
+                    anchors.fill:    parent
+                }
+            }
 
-            //                manager.db_insert_to_group( input_name2.text,labaly.text,input_radif.text)
+            FileDialog
+            {
+                id: product_fileDialog_id
+                //            currentFolder: StandardPaths.standardLocations(StandardPaths.PicturesLocation)[0]
+                // onAccepted: image.source = selectedFile
+                nameFilters: ["png file(*.png)"]
+                onAccepted:
+                {
+                    product_img_lbl_id.text=manager.copy_from_qml_png(selectedFile)
+                }
+            }
+            Label
+            {
+                id:product_lbl_ax
+                text: "عکس محصول"
+                anchors.right:    parent.right
+                y:100
+            }
+            Button
+            {
+                id :product_btn_select
+                text: "انتخاب"
+                anchors.right: product_lbl_ax.left
+                y:100
+                onClicked: {
+                    product_fileDialog_id.open()
+                }
+            }
 
-            //                group_db_read=manager.db_select_from_group()
-            //                number_of_grops=group_db_read.length
-            //                input_name2.text=''
-            //                labaly.text=''
-            //                input_radif.text='0'
-            //            }
-        }
+            Rectangle
+            {
+                width: 100
+                height: 20
+                anchors.right: product_btn_select.left
+                y:100
+                border.width: 1
+                Label
+                {
+                    id:product_img_lbl_id
+                    anchors.fill: parent
+                }
+            }
+            Image{
+                source: product_img_lbl_id.text
+                width: 100
+                height: 100
+                anchors.centerIn: parent
+            }
 
-        Button
-        {
-            text: "حذف"
-            anchors.bottom: parent.bottom
-            //            onClicked: {
-            //                manager.db_delete_Groups(input_name2.text,labaly.text)
-            //                group_db_read=manager.db_select_from_group()
-            //                number_of_grops=group_db_read.length
-            //                input_name2.text=''
-            //                labaly.text=''
-            //                input_radif.text='0'
-            //            }
+            Button
+            {
+                text: "ثبت"
+                anchors.bottom: parent.bottom
+                anchors.right: parent.right
+                y:175
+                //            onClicked: {
+                //                manager.db_delete_Groups(input_name2.text,labaly.text)
+
+                //                manager.db_insert_to_group( input_name2.text,labaly.text,input_radif.text)
+
+                //                group_db_read=manager.db_select_from_group()
+                //                number_of_grops=group_db_read.length
+                //                input_name2.text=''
+                //                labaly.text=''
+                //                input_radif.text='0'
+                //            }
+            }
+
+            Button
+            {
+                text: "حذف"
+                anchors.bottom: parent.bottom
+                //            onClicked: {
+                //                manager.db_delete_Groups(input_name2.text,labaly.text)
+                //                group_db_read=manager.db_select_from_group()
+                //                number_of_grops=group_db_read.length
+                //                input_name2.text=''
+                //                labaly.text=''
+                //                input_radif.text='0'
+                //            }
+            }
         }
     }
 
