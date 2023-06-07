@@ -155,7 +155,7 @@ Item
                             }
 
                         //height: group_rect_id.height
-                        price:product_db_read[index][1]
+                        price:(product_db_read[index][1]).toString();
                         //                    text: "pizza"
                         //                    opacity:0.8
                         //                    src:"images/pizza.png"
