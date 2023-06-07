@@ -97,7 +97,7 @@ Rectangle {
                         //height: fl1.height
                         text:input_product[index][0]
                         src:input_product[index][2]
-                        price:input_product[index][1]
+                        price:input_product[index][1].toString()
                         //                    text: "pizza"
                         //                    opacity:0.8
                         //                    src:"images/pizza.png"
