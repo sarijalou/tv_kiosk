@@ -89,7 +89,14 @@ class Manager(QObject):
         ressult=sql_cmd.select_product(conn,group_name)
         conn.close()
         return ressult   
-       
+    @Slot(str,result=int)
+    def db_select_group_id(self,group_name):
+        
+        database = r"my.db3"
+        conn = sql_cmd.create_connection(database)
+        ressult=sql_cmd.select_group_id(conn,group_name)
+        conn.close()
+        return ressult      
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++sa
 

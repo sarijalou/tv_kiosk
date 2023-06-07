@@ -457,6 +457,20 @@ Item
                     product_img_lbl_id.text=manager.copy_from_qml_png(selectedFile)
                 }
             }
+            CheckBox
+            {
+                id:product_edit_check_id
+                y:75
+                anchors.right:    parent.right
+                text: 'موجود'
+                checked: true
+
+
+
+
+
+
+            }
             Label
             {
                 id:product_lbl_ax
@@ -501,27 +515,33 @@ Item
                 anchors.bottom: parent.bottom
                 anchors.right: parent.right
                 y:175
-                           onClicked: {
-                //            manager.db_delete_Groups(product_edit_name_input_id.text,labaly.text)
+                onClicked: {
+                    //            manager.db_delete_Groups(product_edit_name_input_id.text,labaly.text)
 
-                            manager.db_insert_to_product( product_edit_name_input_id.text,product_img_lbl_id.text,product_edit_price_input_id.text,'44','1')
-                               //def db_insert_to_product(self,name,img,pricee,group_id,Available)
+                    manager.db_insert_to_product( product_edit_name_input_id.text,product_img_lbl_id.text,product_edit_price_input_id.text,manager.db_select_group_id(group_edit_input_name_id.text),Number(product_edit_check_id.checked))
+                    //def db_insert_to_product(self,name,img,pricee,group_id,Available)
 
-                               product_db_read=manager.db_select_product(group_edit_input_name_id.text)
-                               number_of_product=product_db_read.length
+                    product_db_read=manager.db_select_product(group_edit_input_name_id.text)
+                    number_of_product=product_db_read.length
 
-                //                group_db_read=manager.db_select_from_group()
-                //                number_of_grops=group_db_read.length
-                //                product_edit_name_input_id.text=''
-                //                labaly.text=''
-                //                input_radif.text='0'
-                           }
+                    //                group_db_read=manager.db_select_from_group()
+                    //                number_of_grops=group_db_read.length
+                    //                product_edit_name_input_id.text=''
+                    //                labaly.text=''
+                    //                input_radif.text='0'
+                }
             }
 
             Button
             {
                 text: "حذف"
                 anchors.bottom: parent.bottom
+                onClicked: {
+
+                //manager.db_select_group_id(group_edit_input_name_id.text)
+                console.log(group_edit_input_name_id.text)
+                console.log(manager.db_select_group_id(group_edit_input_name_id.text))
+                }
                 //            onClicked: {
                 //                manager.db_delete_Groups(product_edit_name_input_id.text,labaly.text)
                 //                group_db_read=manager.db_select_from_group()
@@ -542,6 +562,10 @@ Item
         number_of_grops=group_db_read.length
         product_db_read=manager.db_select_product(group_db_read[0][0])
         number_of_product=product_db_read.length
+
+        group_edit_input_name_id.text=group_db_read[0][0]
+        group_edit_img_lbl_id.text=group_db_read[0][1]
+
     }
 }
 

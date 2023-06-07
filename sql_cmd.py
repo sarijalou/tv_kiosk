@@ -67,7 +67,24 @@ def select_group(conn):
     for i in rows:
         k.append(list(i))
     return k
+def select_group_id(conn,name):
+    """
+    Create a new task
+    :param conn:
+    :param task:
+    :return:
+    """
 
+    sql ="SELECT  Group_id FROM Groups_tbl  WHERE Group_name ='%s' ;" % (name)
+
+    cur = conn.cursor()
+    cur.execute(sql)
+    rows = cur.fetchone()[0]
+
+    return rows
+   
+
+    
 
 def create_project(conn, project):
     """
