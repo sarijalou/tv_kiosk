@@ -171,7 +171,7 @@ Item
 
                             }
                             else
-                             {
+                            {
                                 product_img_lbl_id.text=src
                                 product_edit_price_input_id.text=price
                                 product_edit_name_input_id.text=text
@@ -528,19 +528,17 @@ Item
                 anchors.right: parent.right
                 y:175
                 onClicked: {
-                    //            manager.db_delete_Groups(product_edit_name_input_id.text,labaly.text)
+
+                   // manager.db_delete_product(product_edit_name_input_id.text,product_img_lbl_id.text,product_edit_price_input_id.text)
+
 
                     manager.db_insert_to_product( product_edit_name_input_id.text,product_img_lbl_id.text,product_edit_price_input_id.text,manager.db_select_group_id(group_edit_input_name_id.text),Number(product_edit_check_id.checked))
-                    //def db_insert_to_product(self,name,img,pricee,group_id,Available)
 
                     product_db_read=manager.db_select_product(group_edit_input_name_id.text)
                     number_of_product=product_db_read.length
+                    product_edit_dialog_id.close()
 
-                    //                group_db_read=manager.db_select_from_group()
-                    //                number_of_grops=group_db_read.length
-                    //                product_edit_name_input_id.text=''
-                    //                labaly.text=''
-                    //                input_radif.text='0'
+
                 }
             }
 
@@ -550,7 +548,10 @@ Item
                 anchors.bottom: parent.bottom
                 onClicked:
                 {
-                manager.db_delete_product(product_edit_name_input_id.text,product_img_lbl_id.text,product_edit_price_input_id.text)
+                    manager.db_delete_product(product_edit_name_input_id.text,product_img_lbl_id.text,product_edit_price_input_id.text)
+                    product_db_read=manager.db_select_product(group_edit_input_name_id.text)
+                    number_of_product=product_db_read.length
+                    product_edit_dialog_id.close()
                 }
                 //            onClicked: {
                 //                manager.db_delete_Groups(product_edit_name_input_id.text,labaly.text)
