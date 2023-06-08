@@ -140,6 +140,20 @@ def delete_Groups(conn,name,img):
     cur.execute(sql,(name,img))
     conn.commit()
 
+def delete_product(conn,name,img,price):
+    """
+    delete a new Groups
+    :param conn:
+    :param task:
+    :return:
+    """
+
+    sql ="DELETE FROM Products WHERE Product_name=? AND Product_image=? AND Product_price=?;"
+
+    cur = conn.cursor()
+    cur.execute(sql,(name,img,price))
+    conn.commit()
+
 def select_product(conn,name):
     '''
     vooroodi nam goorooh

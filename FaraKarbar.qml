@@ -164,7 +164,19 @@ Item
                         {
                             if (index === number_of_product) //if add product button clicked
                             {
+                                product_img_lbl_id.text=""
+                                product_edit_price_input_id.text=""
+                                product_edit_name_input_id.text=""
                                 product_edit_dialog_id.open()
+
+                            }
+                            else
+                             {
+                                product_img_lbl_id.text=src
+                                product_edit_price_input_id.text=price
+                                product_edit_name_input_id.text=text
+                                product_edit_dialog_id.open()
+
                             }
                         }
                     }
@@ -536,11 +548,9 @@ Item
             {
                 text: "حذف"
                 anchors.bottom: parent.bottom
-                onClicked: {
-
-                //manager.db_select_group_id(group_edit_input_name_id.text)
-                console.log(group_edit_input_name_id.text)
-                console.log(manager.db_select_group_id(group_edit_input_name_id.text))
+                onClicked:
+                {
+                manager.db_delete_product(product_edit_name_input_id.text,product_img_lbl_id.text,product_edit_price_input_id.text)
                 }
                 //            onClicked: {
                 //                manager.db_delete_Groups(product_edit_name_input_id.text,labaly.text)

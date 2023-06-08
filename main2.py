@@ -69,6 +69,17 @@ class Manager(QObject):
         conn = sql_cmd.create_connection(database)
         sql_cmd.delete_Groups(conn,name,img)
         conn.close()
+
+    @Slot(str,str,str)    
+    def db_delete_product(self,name,img,price):
+        
+        database = r"my.db3"
+        conn = sql_cmd.create_connection(database)
+        sql_cmd.delete_product(conn,name,img,price)
+        print("hii")
+        conn.close()
+
+
         
         
     @Slot(result=list)
