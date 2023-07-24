@@ -60,7 +60,7 @@ Rectangle
             Button
             {
                 id : button1
-                text : "Button1"
+                text : "درون مجموعه"
                 height: 250
                 width: 200
 
@@ -115,7 +115,7 @@ Rectangle
 
 
                 id : button2
-                text : "Button2"
+                text : "بیرون مجموعه"
                 height: 250
                 width: 200
 

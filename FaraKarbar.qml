@@ -343,6 +343,7 @@ Item
                 anchors.bottom: parent.bottom
                 y:175
                 onClicked: {
+//                    manager.delete_Groups_new(group_edit_input_name_id.text,group_edit_img_lbl_id.text)
                     manager.db_delete_Groups(group_edit_input_name_id.text,group_edit_img_lbl_id.text)
                     group_db_read=manager.db_select_from_group()
                     number_of_grops=group_db_read.length
