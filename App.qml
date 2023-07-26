@@ -3,13 +3,12 @@ import QtQuick.Window 6.5
 import QtQuick.VirtualKeyboard 6.5
 import QtQuick.Controls 6.5
 
-
 Window {
     id: root
     width: Screen.width*2/3
     height: Screen.height/1.2
     visible: true
-
+   property var order_product:[]
     //visibility: "FullScreen"
 
     /*

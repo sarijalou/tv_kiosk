@@ -42,7 +42,7 @@ height:width
         {
             id: label2
 
-            text: qsTr("Label")
+            text: qsTr("")
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top :label.bottom
             color: "#443224"
