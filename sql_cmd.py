@@ -16,7 +16,7 @@ def create_connection(db_file):
         print(e)
 
     return conn
-def insert_customer(conn, num):
+def insert_customer(conn, num,name):
     """
     Create a new task
     :param conn:
@@ -24,10 +24,13 @@ def insert_customer(conn, num):
     :return:
     """
 
-    sql = 'INSERT INTO Customers (Mobile_number) VALUES (%d);'% num
+    sql = 'INSERT INTO Customers (Mobile_number,Name) VALUES (?,?);'
     cur = conn.cursor()
-    cur.execute(sql)
-    conn.commit()
+    try:
+        cur.execute(sql,(num,name))
+        conn.commit()
+    except:
+        print("eeerrorr")
     # return cur.lastrowid
     
 def insert_group(conn, name,img,radif):

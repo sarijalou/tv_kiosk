@@ -180,9 +180,9 @@ Rectangle {
        }
 
         onClicked: {
-            ss1.replace("Fysh.qml")
+            ss1.push("Fysh.qml")
             //console.log (mystr.length)
-            manager.dbbbd(mystr)
+            manager.dbbbd(mystr,'unknown')
 
         }
 

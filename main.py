@@ -34,12 +34,13 @@ class Manager(QObject):
     def dbbbb(self,num):
         print("clicked "+num)
 
-    @Slot(str)
-    def dbbbd(self,num):
+    @Slot(str,str)
+    def dbbbd(self,num,name):
         
         database = r"my.db3"
         conn = sql_cmd.create_connection(database)
-        sql_cmd.insert_customer(conn,int(num))
+        print(int(num),name)
+        sql_cmd.insert_customer(conn,int(num),name)
         conn.close()
         
     @Slot(str,str,str)

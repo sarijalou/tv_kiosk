@@ -17,7 +17,16 @@ Rectangle {
         }
 
     }
+    Button{
+        text:'send_pos'
+        anchors.right: parent.right
+//        onClicked: {
 
+
+
+//        }
+
+    }
     property alias title: textItem.text
 
     Text {
