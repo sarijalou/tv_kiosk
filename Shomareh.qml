@@ -6,7 +6,7 @@ Rectangle {
     //    width: Screen.width/3
     //    height: Screen.height/1.2
 
-    property string mystr: '09'
+
 //    property bool dokmeh: false
     color:"green"
     Button{

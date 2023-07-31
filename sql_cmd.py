@@ -51,7 +51,11 @@ def insert_product(conn,name,img,pricee,group_id,Available):
     cur = conn.cursor()
     cur.execute(sql,(name,img,pricee,group_id,Available))
     conn.commit()
-   
+def insert_order(conn,mobile,qty,time,location,employer_id,Product_name,price,succes,Group_name,shomareh):
+    sql = 'INSERT INTO Orders (Customer_mobile,QTY,Time,Location,Employer_id,Product_name,Product_price,succes,Group_name,shomareh) VALUES (?,?,?,?,?,?,?,?,?,?);'
+    cur = conn.cursor()
+    cur.execute(sql,(mobile,qty,time,location,employer_id,Product_name,price,succes,Group_name,shomareh))
+    conn.commit()  
 def select_group(conn):
     """
     Create a new task

@@ -1,5 +1,6 @@
 import sql_cmd
 import copy_png
+import time
 
 import sys
 
@@ -50,6 +51,14 @@ class Manager(QObject):
         conn = sql_cmd.create_connection(database)
         
         sql_cmd.insert_group(conn,name,img,int(radif))
+        conn.close()
+    @Slot(str,str,int,str,str,str,str,int,str,int)
+    def db_insert_to_order(self,mobile,qty,time,location,employer_id,Product_name,price,succes,Group_name,shomareh):
+        
+        database = r"my.db3"
+        conn = sql_cmd.create_connection(database)
+        
+        sql_cmd.insert_order(conn,mobile,qty,time,location,employer_id,Product_name,price,succes,Group_name,shomareh)
         conn.close()
     
     
@@ -109,7 +118,11 @@ class Manager(QObject):
         ressult=sql_cmd.select_group_id(conn,group_name)
         conn.close()
         return ressult      
-
+    @Slot(result=int)
+    def  db_take_time(self):
+        result=int(time.time())
+        print(result)
+        return result  
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++sa
 
 

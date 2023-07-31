@@ -66,7 +66,8 @@ Rectangle
 
                 onClicked:
                 {
-                    console.log("Clicked on button2")
+                    console.log("درون مجموعه",mylocation)
+                    mylocation='1'
                     ss1.push('Menu_asli.qml')
                 }
                 onPressed:
@@ -121,7 +122,8 @@ Rectangle
 
                 onClicked:
                 {
-                    console.log("Clicked on button2")
+                    console.log(" بیرون مجموعه",mylocation)
+                    mylocation='0'
                     ss1.push('Menu_asli.qml')
 
                 }

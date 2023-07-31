@@ -9,6 +9,9 @@ Window {
     height: Screen.height/1.2
     visible: true
    property var order_product:[]
+   property string mystr: '09'
+   property string mylocation
+
     //visibility: "FullScreen"
 
     /*
@@ -47,7 +50,7 @@ Window {
         anchors.right: parent.right
         anchors.bottom: parent.bottom
         //anchors.left: parent.left
-        initialItem: Menu_asli {}
+        initialItem: Dogozine {}
     }
 
     InputPanel {
