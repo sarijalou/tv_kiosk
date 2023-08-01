@@ -31,7 +31,7 @@ Item
         source: "images/pack.png"
         signal clicked
         anchors.verticalCenter: parent.verticalCenter
-//        x:0
+
         width: parent.width*80/100
         height: parent.height*80/100
     }
@@ -39,8 +39,10 @@ Item
     {
         anchors.left: imgg.right
         anchors.verticalCenter: parent.verticalCenter
-//      anchors.horizontalCenter: parent.horizontalCenter
+
 //        spacing: 5
+
+
         Label
         {
             id: label
@@ -70,7 +72,7 @@ Item
         {
             id: imgg2
 //             x:parent.width*0.75
-            source: ".img/neg.png"
+            source: "images/manfi.png"
             width: 30
             height: 30
 //          signal clicked2
@@ -102,7 +104,7 @@ Item
         {
             id: imgg3
 //            x:root.width*0.85
-            source: ".img/posi.png"
+            source: "images/mosbat.png"
             width:30
             height: 30
 //            signal clicked3
@@ -124,7 +126,7 @@ Item
             text: qsTr("s")
             anchors.verticalCenter: parent.verticalCenter
 //            x: parent.width*90/100
-          anchors.left :imgg3.right
+            anchors.left :imgg3.right
             color: "#443224"
             font.pixelSize: 15
 

@@ -11,6 +11,7 @@ Window {
    property var order_product:[]
    property string mystr: '09'
    property string mylocation
+   property int shomaresh:100
 
     //visibility: "FullScreen"
 

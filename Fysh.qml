@@ -4,7 +4,7 @@ import QtQuick.Controls 6.5
 Rectangle {
     //width: Screen.width/3
     //height: Screen.height/1.2
-    property int shomaresh:0
+
     property int myTime
     width: Screen.width/3
     height: Screen.height/1.2
@@ -24,6 +24,9 @@ Rectangle {
         anchors.right: parent.right
         onClicked: {
         shomaresh=shomaresh+1
+        if(shomaresh>999){
+        shomaresh=100}
+
         myTime=manager.db_take_time()
             for (var i = 0; i < order_product.length; i++) {
                 var item = order_product[i];

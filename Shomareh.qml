@@ -190,5 +190,13 @@ Rectangle {
 
 
     }
+Component.onCompleted:{
+
+mystr='09'
+
+    }
+
+
+
 }
 

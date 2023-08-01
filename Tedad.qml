@@ -164,7 +164,7 @@ property int colect_allprice : 0
 
         onClicked:
         {
-            ss1.push('Shomareh.qml')
+            ss1.replace('Shomareh.qml')
         }
     }
     Rectangle
