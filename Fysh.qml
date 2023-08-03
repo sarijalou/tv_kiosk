@@ -6,8 +6,8 @@ Rectangle {
     //height: Screen.height/1.2
 
     property int myTime
-    width: Screen.width/3
-    height: Screen.height/1.2
+//    width: Screen.width/3
+//    height: Screen.height/1.2
 
     color:"green"
     Button{
@@ -114,7 +114,7 @@ Rectangle {
         width: parent.width*(1-0.15)
         height: parent.height*1/10
         anchors.top:last_rect_id.bottom
-        color:'blue'
+        color:'yellowgreen'
 
         Text
         {

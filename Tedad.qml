@@ -174,7 +174,7 @@ property int colect_allprice : 0
         width: parent.width*(1-0.15)
         height: parent.height*1/10
         anchors.top:list_rect_id.bottom
-        color:'blue'
+        color:'yellowgreen'
 
         Text
         {

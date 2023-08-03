@@ -35,9 +35,9 @@ Item
         width: parent.width*80/100
         height: parent.height*80/100
     }
-    Row
+    Rectangle
     {
-        anchors.left: imgg.right
+       anchors.left: imgg.right
         anchors.verticalCenter: parent.verticalCenter
 
 //        spacing: 5
@@ -50,7 +50,7 @@ Item
             text: qsTr("Label")
             anchors.verticalCenter: parent.verticalCenter
 
-            anchors.left :imgg.right
+            anchors.left: imgg.parent.right
             color: "#443224"
             font.pixelSize: 15
 
