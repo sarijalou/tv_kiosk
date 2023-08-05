@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="fa">
+<head>
+    <title>صورتحساب - {{ invoice_number }}</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <meta charset="UTF-8">
+</head>
+<body>
+    <div class="invoice-info">
+        <div class="logo">
+            <img src="your_logo.png" alt="لوگو شرکت شما">
+        </div>
+        <div class="company-details">
+            <p>نام شرکت شما</p>
+            <p>آدرس خیابان ۱۲۳۴</p>
+            <p>شهر، استان، کد پستی</p>
+            <p>تلفن: (۱۲۳) ۴۵۶-۷۸۹۰</p>
+            <p>ایمیل: info@yourcompany.com</p>
+        </div>
+    </div>
+
+    <h1>صورتحساب</h1>
+    <p><strong>شماره صورتحساب:</strong> {{ invoice_number }}</p>
+    <p><strong>تاریخ:</strong> {{ date }}</p>
+    
+    <table>
+        <tr>
+            <th>#</th>
+            <th>محصول</th>
+            <th>تعداد</th>
+            <th>قیمت واحد</th>
+            <th>قیمت کل</th>
+        </tr>
+        {% for item in items %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ item.name }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>ریال {{ item.unit_price }}</td>
+            <td>ریال {{ item.total_price }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <p class="total-amount"><strong>جمع کل:</strong> ریال {{ total_amount }}</p>
+
+    <div class="thank-you">با تشکر از همکاری شما!</div>
+</body>
+</html>
