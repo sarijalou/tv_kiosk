@@ -6,6 +6,7 @@ Rectangle {
     //height: Screen.height/1.2
 
     property int myTime
+    property var fisch_product :[]
 //    width: Screen.width/3
 //    height: Screen.height/1.2
 
@@ -31,9 +32,12 @@ Rectangle {
             for (var i = 0; i < order_product.length; i++) {
                 var item = order_product[i];
             manager.db_insert_to_order(mystr,item[4],myTime,mylocation,'1',item[1],item[3],1,item[0],shomaresh)
+            fisch_product.push([order_product[i][4],order_product[i][1],order_product[i][3]])
                 }
+            manager.print_to_Fisch(fisch_product)
 
             // Item does not exist, add it to the array with quantity = 1
+//            console.log(/*fisch_product*/)
 
                 }
 

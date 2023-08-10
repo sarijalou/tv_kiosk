@@ -7,6 +7,9 @@ import sys
 from PySide6.QtCore import   QObject,Slot
 from PySide6.QtGui import QGuiApplication 
 from PySide6.QtQml import QQmlApplicationEngine
+from jinja2 import Template
+import datetime 
+import tempy
 
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ata
@@ -60,7 +63,11 @@ class Manager(QObject):
         
         sql_cmd.insert_order(conn,mobile,qty,time,location,employer_id,Product_name,price,succes,Group_name,shomareh)
         conn.close()
-    
+    @Slot(list)
+    def print_to_Fisch(self,fisch_product):
+        # print(fisch_product)
+        tempy.render_invoice(fisch_product)
+
     
     @Slot(str,str,str,str,str)
     def db_insert_to_product(self,name,img,pricee,group_id,Available):
@@ -140,6 +147,7 @@ def main():
     engine.load("App.qml")
     sys.exit(app.exec())
 
-
+    # tempy.render_invoice()
 if __name__ == "__main__":
     main()
+    
