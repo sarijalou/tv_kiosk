@@ -23,7 +23,8 @@ def render_invoice(fisch_product):
     total_amount = 0
     for idx, item in enumerate(invoice_data['items'], start=1):
         item['item_number'] = idx
-        item['total_price'] = int(item['quantity'] * item['unit_price'])
+        item['total_price'] = int(item['quantity']) * int(item['unit_price'])
+        print(item['total_price'])
 
         total_amount += item['total_price']
 
@@ -44,10 +45,12 @@ def render_invoice(fisch_product):
     with open('invoice_output.html', 'w') as output_file:
         output_file.write(rendered_template)
     filename = "invoice_output.html"
-    with open(filename, "rb") as f:
-        data = f.read()
-        lpr = subprocess.Popen(["/usr/bin/lpr", "-"], stdin=subprocess.PIPE)
-        lpr.stdin.write(data)
-        lpr.communicate() # wait for the process to finish
+    #function that send job to printer
+    # with open(filename, "rb") as f:
+    #     data = f.read()
+    #     lpr = subprocess.Popen(["/usr/bin/lpr", "-"], stdin=subprocess.PIPE)
+    #     lpr.stdin.write(data)
+    #     lpr.communicate() # wait for the process to finish
+
 if __name__ == "__main__":
     render_invoice()
