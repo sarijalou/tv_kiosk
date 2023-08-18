@@ -4,19 +4,20 @@ import subprocess
 
 
 def render_invoice(fisch_product):
-    mylist=list()
+    mylist = []
     # Define the invoice data (this can come from a database, API, or any other source)
     print(fisch_product)
     current_datetime = datetime.datetime.now()
-    current_datetime =str(current_datetime)[0:19]
+    current_datetime = str(current_datetime)[0:19]
     for i in fisch_product:
-        my_dict= {'name':i[1], 'quantity': i[0], 'unit_price': i[2]}
+        my_dict = {'name': i[1], 'quantity': i[0], 'unit_price': i[2]}
         mylist.append(my_dict)
     
     invoice_data = {
         'invoice_number': 'INV-2023-001',
-        'date': current_datetime ,
-        'items': mylist
+        'date': current_datetime,
+        'items': mylist,
+        'image_path': 'download.png'  # Replace with the actual path or URL of your image
     }
 
     # Calculate the total amount and add the item number to each item dictionary
@@ -25,7 +26,6 @@ def render_invoice(fisch_product):
         item['item_number'] = idx
         item['total_price'] = int(item['quantity']) * int(item['unit_price'])
         print(item['total_price'])
-
         total_amount += item['total_price']
 
     # Read the invoice template file
@@ -39,13 +39,15 @@ def render_invoice(fisch_product):
     rendered_template = template.render(invoice_number=invoice_data['invoice_number'],
                                        date=invoice_data['date'],
                                        items=invoice_data['items'],
-                                       total_amount=total_amount)
+                                       total_amount=total_amount,
+                                       image_path=invoice_data['image_path'])
 
     # Save the rendered invoice to a new file
     with open('invoice_output.html', 'w') as output_file:
         output_file.write(rendered_template)
+
     filename = "invoice_output.html"
-    #function that send job to printer
+    #function that sends the job to the printer
     # with open(filename, "rb") as f:
     #     data = f.read()
     #     lpr = subprocess.Popen(["/usr/bin/lpr", "-"], stdin=subprocess.PIPE)

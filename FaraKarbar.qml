@@ -11,6 +11,7 @@ Item
 
     property int number_of_grops:-1
     property var group_db_read:[]
+    property var client_db_read:[]
 
     property int number_of_product: -1
     property var product_db_read: []
@@ -221,6 +222,25 @@ Item
                     //                        group_edit_dialog_id.visible=1;
                 }
             }
+            Button{
+                width: 80
+
+                //            anchors.left: parent.left
+                text: " اطلاعات بنگاه"
+
+                onClicked:
+                {
+                   client_edit_dialog_id.open()
+                   client_db_read=manager.db_select_from_client()
+                   client_edit_img_lbl_id.text=client_db_read[0][1]
+                   input5_radif.text=client_db_read[0][4]
+                   input4_radif.text=client_db_read[0][3]
+                   input3_radif.text=client_db_read[0][2]
+                   input2_radif.text=client_db_read[0][0]
+
+
+                }
+            }
         }
     }
 
@@ -232,7 +252,7 @@ Item
         width: parent.width*9/10
         height: parent.height*9/10
         anchors.centerIn: parent
-        title: "change group INFO"
+        title: "change client INFO"
         modal: true
         // standardButtons: Dialog.Accepted
 
@@ -325,7 +345,7 @@ Item
                 anchors.right: parent.right
                 y:175
                 onClicked: {
-                    manager.db_delete_Groups(group_edit_input_name_id.text,group_edit_img_lbl_id.text)
+                  manager.db_delete_Groups(group_edit_input_name_id.text,group_edit_img_lbl_id.text)
 
                     manager.db_insert_to_group( group_edit_input_name_id.text,group_edit_img_lbl_id.text,input_radif.text)
 
@@ -343,7 +363,7 @@ Item
                 anchors.bottom: parent.bottom
                 y:175
                 onClicked: {
-//                    manager.delete_Groups_new(group_edit_input_name_id.text,group_edit_img_lbl_id.text)
+                    //                    manager.delete_Groups_new(group_edit_input_name_id.text,group_edit_img_lbl_id.text)
                     manager.db_delete_Groups(group_edit_input_name_id.text,group_edit_img_lbl_id.text)
                     group_db_read=manager.db_select_from_group()
                     number_of_grops=group_db_read.length
@@ -530,7 +550,7 @@ Item
                 y:175
                 onClicked: {
 
-                   // manager.db_delete_product(product_edit_name_input_id.text,product_img_lbl_id.text,product_edit_price_input_id.text)
+                    // manager.db_delete_product(product_edit_name_input_id.text,product_img_lbl_id.text,product_edit_price_input_id.text)
 
 
                     manager.db_insert_to_product( product_edit_name_input_id.text,product_img_lbl_id.text,product_edit_price_input_id.text,manager.db_select_group_id(group_edit_input_name_id.text),Number(product_edit_check_id.checked))
@@ -565,8 +585,238 @@ Item
             }
         }
     }
+    //++++++++++++++++++++++++++++++++++++++++++++ client edit +++++++++++++++++++++++++++++++++++++++++++++++++
+    Dialog
+    {
+        id:client_edit_dialog_id
+        width: parent.width*9/10
+        height: parent.height*9/10
+        anchors.centerIn: parent
+        title: "change client INFO"
+        modal: true
+        // standardButtons: Dialog.Accepted
+
+        //contentItem: Rectangle
+        Rectangle
+        {
+            anchors.fill: parent
+            color: "yellow"
+            radius: 10
+
+//            Button
+//            {
+//                text: "خروج"
+//                onClicked: client_edit_dialog_id.close()
+//            }
 
 
+
+            FileDialog
+            {
+                id: client_edit_fileDialog_id
+                //            currentFolder: StandardPaths.standardLocations(StandardPaths.PicturesLocation)[0]
+                // onAccepted: image.source = selectedFile
+                nameFilters: ["png file(*.png)"]
+                onAccepted:
+                {
+                    client_edit_img_lbl_id.text=manager.copy_from_qml_png(selectedFile)
+                    console.log(client_edit_img_lbl_id.text)
+                }
+            }
+            Rectangle
+            {
+                width: 200
+                height: 20
+                border.width: 1
+                border.color: "black"
+                anchors.right: lbl2_radif.left
+                TextInput
+                {
+//                    id:group_edit_input_name_id
+                    anchors.fill:    parent
+                }
+            }
+
+
+
+            Label
+            {
+                id:lbl2_ax
+                text: "عکس رستوران"
+                anchors.right:    parent.right
+                y:100
+            }
+            Button
+            {
+                id :btn2_select
+                text: "انتخاب"
+                anchors.right: lbl2_ax.left
+                y:100
+                onClicked:
+                {
+                    client_edit_fileDialog_id.open()
+                }
+            }
+
+            Rectangle
+            {
+                width: 100
+                height: 20
+                anchors.right: btn2_select.left
+                y:100
+                border.width: 1
+                color: "blue"
+                Label
+                {
+                    id:client_edit_img_lbl_id
+                    anchors.fill: parent
+                }
+            }
+
+            Button
+            {
+                text: "ثبت"
+                anchors.bottom: parent.bottom
+                anchors.right: parent.right
+                y:175
+                onClicked: {
+                    manager.db_delete_client()
+
+                    manager.db_insert_client_info(input2_radif.text,client_edit_img_lbl_id.text,input3_radif.text,input4_radif.text,input5_radif.text)
+                    client_edit_dialog_id.close()
+//                    group_db_read=manager.db_select_from_group()
+//                    number_of_grops=group_db_read.length
+//                    group_edit_input_name_id.text=''
+//                    group_edit_img_lbl_id.text=''
+//                    input_radif.text='0'
+                }
+            }
+
+//            Button
+//            {
+//                text: "حذف"
+//                anchors.bottom: parent.bottom
+//                y:175
+//                onClicked: {
+//                    //                    manager.delete_Groups_new(group_edit_input_name_id.text,group_edit_img_lbl_id.text)
+//                    manager.db_delete_client()
+////                    group_db_read=manager.db_select_from_group()
+////                    number_of_grops=group_db_read.length
+////                    group_edit_input_name_id.text=''
+////                    group_edit_img_lbl_id.text=''
+////                    input_radif.text='0'
+//                }
+//            }
+
+            Image{
+                id:imagekk
+                source: client_edit_img_lbl_id.text
+                width: 100
+                height: 100
+                anchors.centerIn: parent
+
+            }
+
+            Label
+            {
+                id:lbl2_radif
+                text: "نام رستوران:"
+                anchors.right:    parent.right
+                anchors.top: imagek.bottom
+            }
+            Rectangle
+            {
+                width: 200
+                height: 20
+                //            color: "yellow"
+                border.width: 1
+                border.color: "black"
+                anchors.right: lbl2_radif.left
+                anchors.top: imagek.bottom
+
+                TextInput
+                {
+                    id:input2_radif
+                    anchors.fill:    parent
+                }
+            }
+            Label
+            {
+                id:lbl3_radif
+                text: "آدرس رستوران:"
+                anchors.right:    parent.right
+                y:325
+//                anchors.top: imagekk.bottom
+            }
+            Rectangle
+            {
+                width: 300
+                height: 40
+                id:adress_rect
+                //            color: "yellow"
+                border.width: 1
+                border.color: "black"
+                anchors.right: lbl3_radif.left
+                anchors.top: imagekk.bottom
+
+                TextInput
+                {
+                    id:input3_radif
+                    anchors.fill:    parent
+                }
+            }
+            Label
+            {
+                id:lbl4_radif
+                text: "تلفن  رستوران:"
+                anchors.right:    parent.right
+                y:375
+//                anchors.top: adress_rect.bottom
+            }
+            Rectangle
+            {
+                width: 200
+                height: 20
+                //            color: "yellow"
+                border.width: 1
+                border.color: "black"
+                anchors.right: lbl4_radif.left
+//               anchors.top: adress_rect.bottom
+                y:375
+
+                TextInput
+                {
+                    id:input4_radif
+                    anchors.fill:    parent
+                }
+            }
+            Label
+            {
+                id:lbl5_radif
+                text: "ایمیل  رستوران:"
+                anchors.right:    parent.right
+//                anchors.top: lbl4_radif.bottom
+                y:425
+            }
+            Rectangle
+            {
+                width: 200
+                height: 20
+                //            color: "yellow"
+                border.width: 1
+                border.color: "black"
+                anchors.right: lbl5_radif.left
+//                anchors.top: lbl4_radif.bottom
+                y:425
+
+                TextInput
+                {
+                    id:input5_radif
+                    anchors.fill:    parent
+                }
+            }
+        }
+    }
     //++++++++++++++++++++++++++++++++++++++++++++ Component.onCompleted +++++++++++++++++++++++++++++++++++++++++++++++++
     Component.onCompleted:
     {

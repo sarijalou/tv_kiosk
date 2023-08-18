@@ -63,6 +63,14 @@ class Manager(QObject):
         
         sql_cmd.insert_order(conn,mobile,qty,time,location,employer_id,Product_name,price,succes,Group_name,shomareh)
         conn.close()
+    @Slot(str,str,str,int,str)
+    def db_insert_client_info(self,name,img,addr,num,mail):
+        # print(name,img,addr,num,mail)
+        database = r"my.db3"
+        conn = sql_cmd.create_connection(database)
+        
+        sql_cmd.insert_client_info(conn,name,img,addr,num,mail)
+        conn.close()    
     @Slot(list)
     def print_to_Fisch(self,fisch_product):
         # print(fisch_product)
@@ -79,6 +87,13 @@ class Manager(QObject):
         conn.close()
     
     
+    @Slot()    
+    def db_delete_client(self):
+        
+        database = r"my.db3"
+        conn = sql_cmd.create_connection(database)
+        sql_cmd.delete_client(conn)
+        conn.close()
     @Slot(str,str)    
     def db_delete_Groups(self,name,img):
         
@@ -86,7 +101,6 @@ class Manager(QObject):
         conn = sql_cmd.create_connection(database)
         sql_cmd.delete_Groups(conn,name,img)
         conn.close()
-
     @Slot(str,str,str)    
     def db_delete_product(self,name,img,price):
         
@@ -97,7 +111,14 @@ class Manager(QObject):
         conn.close()
 
 
+    @Slot(result=list)
+    def db_select_from_client(self):
         
+        database = r"my.db3"
+        conn = sql_cmd.create_connection(database)
+        ressult=sql_cmd.select_client(conn)
+        conn.close()
+        return ressult    
         
     @Slot(result=list)
     def db_select_from_group(self):

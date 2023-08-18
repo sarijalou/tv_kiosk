@@ -16,6 +16,23 @@ def create_connection(db_file):
         print(e)
 
     return conn
+def insert_client_info(conn,name,img,addr,num,mail):
+    """
+    Create a new task
+    :param conn:
+    :param task:
+    :return:
+    """
+    # print(name,img,addr,num,mail)
+
+    sql = 'INSERT INTO ClientInfo (clientName,logo,adress,telephone,email) VALUES (?,?,?,?,?);'
+    cur = conn.cursor()
+    try:
+        cur.execute(sql,(name,img,addr,num,mail))
+        conn.commit()
+    except:
+        print("eeerrorr")
+
 def insert_customer(conn, num,name):
     """
     Create a new task
@@ -73,6 +90,25 @@ def select_group(conn):
     k=list()
     for i in rows:
         k.append(list(i))
+    return k
+def select_client(conn):
+    """
+    Create a new task
+    :param conn:
+    :param task:
+    :return:
+    """
+
+    sql ="SELECT  clientName, logo,adress,telephone,email FROM ClientInfo  ;"
+
+    cur = conn.cursor()
+    cur.execute(sql)
+    rows = cur.fetchall()
+   
+    k=list()
+    for i in rows:
+        k.append(list(i))
+        
     return k
 def select_group_id(conn,name):
     """
@@ -132,7 +168,19 @@ def ss():
     with conn:
         # create a new project
         insert_customer(conn,9142010051)
+def delete_client(conn):
+    """
+    delete a new Groups
+    :param conn:
+    :param task:
+    :return:
+    """
 
+    sql ="DELETE FROM ClientInfo ;"
+
+    cur = conn.cursor()
+    cur.execute(sql)
+    conn.commit()
 def delete_Groups(conn,name,img):
     """
     delete a new Groups
