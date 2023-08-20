@@ -3,10 +3,12 @@ import datetime
 import subprocess
 
 
-def render_invoice(fisch_product):
+
+def render_invoice(fisch_product,result):
     mylist = []
+    
     # Define the invoice data (this can come from a database, API, or any other source)
-    print(fisch_product)
+    print(fisch_product,result)
     current_datetime = datetime.datetime.now()
     current_datetime = str(current_datetime)[0:19]
     for i in fisch_product:
@@ -17,7 +19,11 @@ def render_invoice(fisch_product):
         'invoice_number': 'INV-2023-001',
         'date': current_datetime,
         'items': mylist,
-        'image_path': 'download.png'  # Replace with the actual path or URL of your image
+        'image_path': result[0][1],  # Replace with the actual path or URL of your image
+        'client_name':result[0][0],
+        'adress':result[0][2],
+        'phone':result[0][3],
+        'mail':result[0][4]
     }
 
     # Calculate the total amount and add the item number to each item dictionary
@@ -40,7 +46,12 @@ def render_invoice(fisch_product):
                                        date=invoice_data['date'],
                                        items=invoice_data['items'],
                                        total_amount=total_amount,
-                                       image_path=invoice_data['image_path'])
+                                       image_path=invoice_data['image_path'],
+                                       client_name=invoice_data['client_name'],
+                                       adress=invoice_data['adress'],
+                                       phone=invoice_data['phone'],
+                                       mail=invoice_data['mail']
+                                       )
 
     # Save the rendered invoice to a new file
     with open('invoice_output.html', 'w') as output_file:

@@ -10,7 +10,7 @@ from PySide6.QtQml import QQmlApplicationEngine
 from jinja2 import Template
 import datetime 
 import tempy
-
+client_list=list()
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ata
 class Manager(QObject):
@@ -70,11 +70,20 @@ class Manager(QObject):
         conn = sql_cmd.create_connection(database)
         
         sql_cmd.insert_client_info(conn,name,img,addr,num,mail)
-        conn.close()    
+        conn.close()   
+        # tempy.render_invoice2(name,img,addr,num,mail) 
+        print(name,img,addr,num,mail)
     @Slot(list)
     def print_to_Fisch(self,fisch_product):
+        global client_list
         # print(fisch_product)
-        tempy.render_invoice(fisch_product)
+
+        # database = r"my.db3"
+        # conn = sql_cmd.create_connection(database)
+        # result=sql_cmd.select_client(conn)
+        # conn.close()
+        # return ressult    
+        tempy.render_invoice(fisch_product,client_list)
 
     
     @Slot(str,str,str,str,str)
@@ -155,6 +164,14 @@ class Manager(QObject):
 
 
 def main():
+    global client_list
+    # +++++++++++++++++++++++++++take client info by list++++++++++++++++++++++++++++++#
+    database = r"my.db3"
+    conn = sql_cmd.create_connection(database)
+    client_list=sql_cmd.select_client(conn)
+    conn.close()
+    # tempy.render_invoice2(client_list)
+    # +++++++++++++++++++++++++++take client info by list++++++++++++++++++++++++++++++#
     app = QGuiApplication(sys.argv)
 
     manager = Manager()
@@ -167,8 +184,8 @@ def main():
 
     engine.load("App.qml")
     sys.exit(app.exec())
+    
 
-    # tempy.render_invoice()
 if __name__ == "__main__":
     main()
     
